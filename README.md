@@ -8,6 +8,12 @@
 对于没有编程基础的人群而言，就算拿到了能用的代码，如何让代码跑起来还需要一番折腾；对于程序员而言，重复做应用不如投入更多精力去开发 prompt。因此，我做了 PTPT，
 让 ChatGPT 帮助我完成一些纯文本文件的处理工作，比如 Markdown 翻译、格式转换等。
 
+在 PTPT 之前，我开发了一个名为 C3PO 的项目，在 C3PO 中，我需要手动去处理返回的 csv，如果想要支持 GNU po还需要写代码适配。同时，在 v2ex 论坛上，有朋友提出了很好的意见：
+根本不需要做一个专门的软件来实现某个功能，开发 prompt 就足够了。这也是 PTPT 希望达到的效果。
+
+至于为什么不使用现成的xx项目 / 使用一些 web 版的 ChatGPT 套壳工具，首先很多这些工具已经围绕 prompt 开始收费了，对他们来说 prompt 是核心资产，而我觉得 prompt 也应该是开源共享的。
+另外，命令行工具能保持这个项目的操作尽可能简单，而且可以直接输出成文件，不需要再复制粘贴。最后就是，做项目带来的无限的成就感。
+
 ## 功能
 
 - 让 ChatGPT 替你处理纯文本文件！
@@ -18,9 +24,9 @@
 
 - [x] 🧸角色扮演（仅供娱乐）
 - [x] 🧸问候语（仅供娱乐）
-- [x] 📝Markdown 翻译
-- [x] 📝csv 翻译成 csv
-- [x] 📝csv 翻译成 GNU po
+- [x] 📝Markdown 翻译 - translate-markdown (e.g. [Hello_translated.md](example/Hello_translated.md))
+- [x] 📝csv 翻译成 csv - translate-csv (e.g. [example_translated.csv](example/example_translated.csv))
+- [ ] 📝csv 翻译成 GNU po (WIP)
 
 ## 安装
 

@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"bytes"
-	"fmt"
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/leslieleung/ptpt/internal/prompt"
 	"github.com/leslieleung/ptpt/internal/ui"
@@ -50,7 +49,6 @@ func loadPrompt() {
 		if err != nil {
 			ui.ErrorfExit("Error reading config file, %s", err)
 		}
-		fmt.Println(vpp.AllSettings())
 		bundle := prompt.Bundle{}
 		err = vpp.Unmarshal(&bundle)
 		if err != nil {
