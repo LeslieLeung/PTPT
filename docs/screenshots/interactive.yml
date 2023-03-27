@@ -1,0 +1,207 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: zsh
+  
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /Users/leslieleung/Projects/PTPT
+  
+  # Export additional ENV variables
+  env:
+    recording: true
+  
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 80
+  
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 25
+  
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+  
+  # Quality
+  # 1 - 100
+  quality: 100
+  
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+  
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+  
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: Terminalizer
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+  
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+  
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+  
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+  
+  # The size of the font
+  fontSize: 12
+  
+  # The height of lines
+  lineHeight: 1
+  
+  # The spacing between letters
+  letterSpacing: 0
+  
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+  
+# Records, feel free to edit them
+records:
+  - delay: 263
+    content: "\e[0m\e[49m\e[39m\e[27m\e[24m\r\e[K\r\n\e[1A\e7\e[0m\e[49m\e[39m\e[0m\e[49m\e[38;5;31m\e[1m\e[38;5;31m\e[38;5;39m~\e[0m\e[38;5;39m\e[49m\e[38;5;31m/Projects/\e[1m\e[38;5;31m\e[38;5;39mPTPT\e[0m\e[38;5;39m\e[49m\e[38;5;31m\e[0m\e[38;5;31m\e[49m\e[38;5;31m\e[0m\e[38;5;31m\e[49m \e[0m\e[38;5;31m\e[49m\e[38;5;76m❯\e[0m\e[38;5;76m\e[49m\e[38;5;76m\e[0m\e[38;5;76m\e[49m\e[30m\e[0m\e[30m\e[49m\e[39m \e[0m\e[49m\e[39m\e[?2004h"
+  - delay: 630
+    content: "\e[?25l\e8\e[0m\e[49m\e[39m\e[27m\e[24m\e[J\e]2;leslieleung@LesliedeMBP:~/Projects/PTPT\a\e]1;~/Projects/PTPT\a\e[0m\e[38;5;31m\e[49m\e[39m\e[27m\e[24m\e[1m\e[7m%\e[27m\e[1m\e[0m                                                                               \r\e[0m\e[49m\e[39m\e[27m\e[24m\e[K\r\e[0m\e[27m\e[24m\e[J\e[0m\e[49m\e[39m\e[0m\e[49m\e[38;5;31m\e[1m\e[38;5;31m\e[38;5;39m~\e[0m\e[38;5;39m\e[49m\e[38;5;31m/Projects/\e[1m\e[38;5;31m\e[38;5;39mPTPT\e[0m\e[38;5;39m\e[49m\e[38;5;31m\e[0m\e[38;5;31m\e[49m\e[38;5;31m\e[0m\e[38;5;31m\e[49m \e[0m\e[38;5;31m\e[49m\e[38;5;76m❯\e[0m\e[38;5;76m\e[49m\e[38;5;76m\e[0m\e[38;5;76m\e[49m\e[30m\e[0m\e[30m\e[49m\e[39m \e[0m\e[49m\e[39m\e[K\e[61C\e[0m\e[49m\e[39m\e[61D\e[?1h\e=\e[?12l\e[?25h\e[?2004h"
+  - delay: 258
+    content: "p\bp\e[90mtpt\e[39m\b\b\b"
+  - delay: 66
+    content: "\bp\e[39mt"
+  - delay: 125
+    content: "\e[39mp"
+  - delay: 74
+    content: "\e[39mt"
+  - delay: 291
+    content: " \e[90mtry\e[39m\b\b\b"
+  - delay: 119
+    content: "\e[39mr\e[39m \e[39m \b\b"
+  - delay: 112
+    content: u
+  - delay: 154
+    content: 'n'
+  - delay: 155
+    content: "\e[?1l\e>\e[?25l\e[?2004l\r\r\e[0m\e[27m\e[24m\e[J\e[0m\e[49m\e[27m\e[24m\e[38;5;76m❯\e[0m\e[38;5;76m\e[49m\e[39m\e[27m\e[24m ptpt run\e[K\e[?12l\e[?25h\r\r\n\e]2;ptpt run\a\e]1;ptpt\a"
+  - delay: 21
+    content: "\e7\e[?25l\e8\e[0G\e[2K\e[1;92m? \e[0m\e[1;99mSelect a prompt:\e[0m  \e[36m[Use arrows to move, type to filter]\e[0m\r\n\e[1;36m> greetings - \e[36mSends a warm greeting\e[0m\r\n\e[39m  hello - \e[36mSays hello\e[0m\r\n\e[39m  role-spock - \e[36mRole Play as Spock\e[0m\r\n\e[39m  role-yoda - \e[36mRole Play as Yoda\e[0m\r\n\e[39m  translate-csv - \e[36mTranslate CSV\e[0m\r\n\e[39m  translate-csv-to-po - \e[36mTranslate CSV to GNU po\e[0m\r\n\e[39m  translate-markdown - \e[36mTranslate Markdown\e[0m\r\n\e7\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G"
+  - delay: 2827
+    content: "\e8\e[?25h\e8\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1;92m? \e[0m\e[1;99mSelect a prompt:\e[0m\e[36m greetings\e[0m\r\n\e[0G\e[2K\e[1;92m? \e[0m\e[1;99mEnter your query: \e[0m\e[?25l\e[?25l\e7\e[999;999f\e[6n\e8\e[?25h\e[6n"
+  - delay: 626
+    content: h
+  - delay: 124
+    content: e
+  - delay: 83
+    content: l
+  - delay: 130
+    content: l
+  - delay: 164
+    content: o
+  - delay: 209
+    content: "\e[1D\e[1D\e[1D\e[1D\e[1D\e[1B\e[0G\e[1A\e[?25h\e[0G\e[2K\e[1;92m? \e[0m\e[1;99mEnter your query: \e[0m\e[36mhello\e[0m\r\n"
+  - delay: 2642
+    content: "Hello and welcome! Thank you for contacting us. It's a pleasure to speak with you today. How may I assist you?\r\n\e[1m\e[7m%\e[27m\e[1m\e[0m                                                                               \r \r\e]2;leslieleung@LesliedeMBP:~/Projects/PTPT\a\e]1;~/Projects/PTPT\a"
+  - delay: 26
+    content: "\r\e[0m\e[27m\e[24m\e[J\e[0m\e[49m\e[39m\e[0m\e[49m\e[38;5;31m\e[1m\e[38;5;31m\e[38;5;39m~\e[0m\e[38;5;39m\e[49m\e[38;5;31m/Projects/\e[1m\e[38;5;31m\e[38;5;39mPTPT\e[0m\e[38;5;39m\e[49m\e[38;5;31m\e[0m\e[38;5;31m\e[49m\e[38;5;31m\e[0m\e[38;5;31m\e[49m \e[0m\e[38;5;31m\e[49m\e[38;5;76m❯\e[0m\e[38;5;76m\e[49m\e[38;5;76m\e[0m\e[38;5;76m\e[49m\e[30m\e[0m\e[30m\e[49m\e[39m \e[0m\e[49m\e[39m\e[K\e[59C\e[0m\e[49m\e[38;5;101m7s\e[0m\e[38;5;101m\e[49m\e[38;5;101m\e[0m\e[38;5;101m\e[49m\e[38;5;101m\e[0m\e[38;5;101m\e[49m\e[39m\e[61D\e[?1h\e=\e[?2004h"
+  - delay: 1082
+    content: "p\bp\e[90mtpt run\e[39m\b\b\b\b\b\b\b"
+  - delay: 62
+    content: "\bp\e[39mt"
+  - delay: 108
+    content: "\e[39mp"
+  - delay: 75
+    content: "\e[39mt"
+  - delay: 332
+    content: "\e[39m "
+  - delay: 112
+    content: "\e[39mr"
+  - delay: 89
+    content: "\e[39mu"
+  - delay: 167
+    content: "\e[39mn"
+  - delay: 157
+    content: "\e[?1l\e>\e[?25l\e[?2004l\r\r\e[0m\e[27m\e[24m\e[J\e[0m\e[49m\e[27m\e[24m\e[38;5;76m❯\e[0m\e[38;5;76m\e[49m\e[39m\e[27m\e[24m ptpt run\e[K\e[?12l\e[?25h\r\r\n\e]2;ptpt run\a\e]1;ptpt\a"
+  - delay: 16
+    content: "\e7\e[?25l\e8\e[0G\e[2K\e[1;92m? \e[0m\e[1;99mSelect a prompt:\e[0m  \e[36m[Use arrows to move, type to filter]\e[0m\r\n\e[1;36m> greetings - \e[36mSends a warm greeting\e[0m\r\n\e[39m  hello - \e[36mSays hello\e[0m\r\n\e[39m  role-spock - \e[36mRole Play as Spock\e[0m\r\n\e[39m  role-yoda - \e[36mRole Play as Yoda\e[0m\r\n\e[39m  translate-csv - \e[36mTranslate CSV\e[0m\r\n\e[39m  translate-csv-to-po - \e[36mTranslate CSV to GNU po\e[0m\r\n\e[39m  translate-markdown - \e[36mTranslate Markdown\e[0m\r\n\e7\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G"
+  - delay: 1069
+    content: "\e8\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1;92m? \e[0m\e[1;99mSelect a prompt:\e[0m  \e[36m[Use arrows to move, type to filter]\e[0m\r\n\e[39m  greetings - \e[36mSends a warm greeting\e[0m\r\n\e[1;36m> hello - \e[36mSays hello\e[0m\r\n\e[39m  role-spock - \e[36mRole Play as Spock\e[0m\r\n\e[39m  role-yoda - \e[36mRole Play as Yoda\e[0m\r\n\e[39m  translate-csv - \e[36mTranslate CSV\e[0m\r\n\e[39m  translate-csv-to-po - \e[36mTranslate CSV to GNU po\e[0m\r\n\e[39m  translate-markdown - \e[36mTranslate Markdown\e[0m\r\n\e7\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G\e[1A\e[0G"
+  - delay: 631
+    content: "\e8\e[?25h\e8\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1A\e[0G\e[2K\e[1;92m? \e[0m\e[1;99mSelect a prompt:\e[0m\e[36m hello\e[0m\r\n\e[0G\e[2K\e[1;92m? \e[0m\e[1;99mEnter your query: \e[0m\e[?25l\e[?25l\e7\e[999;999f\e[6n\e8\e[?25h\e[6n"
+  - delay: 2207
+    content: h
+  - delay: 103
+    content: i
+  - delay: 151
+    content: ' '
+  - delay: 176
+    content: t
+  - delay: 98
+    content: h
+  - delay: 83
+    content: e
+  - delay: 95
+    content: r
+  - delay: 110
+    content: e
+  - delay: 64
+    content: r
+  - delay: 502
+    content: "\e[1D\e[0K"
+  - delay: 1061
+    content: "\e[1D\e[1D\e[1D\e[1D\e[1D\e[1D\e[1D\e[1D\e[1B\e[0G\e[1A\e[?25h\e[0G\e[2K\e[1;92m? \e[0m\e[1;99mEnter your query: \e[0m\e[36mhi there\e[0m\r\n"
+  - delay: 1843
+    content: "I'm sorry, I have to ignore your input. \r\n\r\nHello.\r\n\e[1m\e[7m%\e[27m\e[1m\e[0m                                                                               \r \r\e]2;leslieleung@LesliedeMBP:~/Projects/PTPT\a\e]1;~/Projects/PTPT\a"
+  - delay: 27
+    content: "\r\e[0m\e[27m\e[24m\e[J\e[0m\e[49m\e[39m\e[0m\e[49m\e[38;5;31m\e[1m\e[38;5;31m\e[38;5;39m~\e[0m\e[38;5;39m\e[49m\e[38;5;31m/Projects/\e[1m\e[38;5;31m\e[38;5;39mPTPT\e[0m\e[38;5;39m\e[49m\e[38;5;31m\e[0m\e[38;5;31m\e[49m\e[38;5;31m\e[0m\e[38;5;31m\e[49m \e[0m\e[38;5;31m\e[49m\e[38;5;76m❯\e[0m\e[38;5;76m\e[49m\e[38;5;76m\e[0m\e[38;5;76m\e[49m\e[30m\e[0m\e[30m\e[49m\e[39m \e[0m\e[49m\e[39m\e[K\e[59C\e[0m\e[49m\e[38;5;101m8s\e[0m\e[38;5;101m\e[49m\e[38;5;101m\e[0m\e[38;5;101m\e[49m\e[38;5;101m\e[0m\e[38;5;101m\e[49m\e[39m\e[61D\e[?1h\e=\e[?2004h"
+  - delay: 4110
+    content: "\e[?2004l\r\r\n"

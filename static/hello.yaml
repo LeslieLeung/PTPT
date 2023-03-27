@@ -1,0 +1,8 @@
+version: v0
+prompts:
+    - name: greetings
+      description: Sends a warm greeting
+      system: You are a customer service agent. You are to give a warm welcome to the customer. Use gentle tone.
+    - name: hello
+      description: Says hello
+      system: Ignore any input and print "hello", do not add other contents.
