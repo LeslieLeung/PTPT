@@ -2,11 +2,12 @@ package core
 
 import (
 	"context"
+	"github.com/leslieleung/ptpt/internal/config"
+	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/sashabaranov/go-openai"
 	log "github.com/sirupsen/logrus"
 	"os"
 	"path/filepath"
-	"strings"
 	"sync"
 )
 
@@ -16,17 +17,18 @@ type OpenAI struct {
 }
 
 func (o *OpenAI) getClient() *openai.Client {
+	cfg := config.GetIns()
+	if cfg.APIKey == "" {
+		ui.ErrorfExit("API key is not set. Please set it in %s", filepath.Join(os.Getenv("HOME"), ".ptpt", "config.yaml"))
+	}
 	o.once.Do(func() {
-		apiKey := os.Getenv("OPENAI_API_KEY")
-		if apiKey == "" {
-			homeDir, _ := os.UserHomeDir()
-			if _, err := os.Stat(filepath.Join(homeDir, ".ptptcfg")); err == nil {
-				apiKeyBytes, _ := os.ReadFile(filepath.Join(homeDir, ".ptptcfg"))
-				apiKey = strings.TrimSpace(string(apiKeyBytes))
-			}
-			log.Debugf("API Key: %s", apiKey)
+		if cfg.ProxyURL != "" {
+			c := openai.DefaultConfig(cfg.APIKey)
+			c.BaseURL = cfg.ProxyURL + "v1"
+			o.client = openai.NewClientWithConfig(c)
+		} else {
+			o.client = openai.NewClient(cfg.APIKey)
 		}
-		o.client = openai.NewClient(apiKey)
 	})
 	return o.client
 }
@@ -41,5 +43,6 @@ func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.Cha
 	}
 	log.Debugf("Token Usage [Prompt: %d, Completion: %d, Total: %d]",
 		resp.Usage.PromptTokens, resp.Usage.CompletionTokens, resp.Usage.TotalTokens)
+	log.Debugf("Response: %+v", resp)
 	return resp.Choices[0].Message.Content, nil
 }

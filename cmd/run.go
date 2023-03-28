@@ -65,7 +65,7 @@ func handleREPL() {
 		},
 		{
 			Name:     "input",
-			Prompt:   &survey.Input{Message: "Enter your query:"},
+			Prompt:   &survey.Multiline{Message: "Enter your query:"},
 			Validate: survey.Required,
 		},
 	}
@@ -100,7 +100,7 @@ func handleSingleArg(args []string) {
 	qs := []*survey.Question{
 		{
 			Name:     "input",
-			Prompt:   &survey.Input{Message: "Enter your query:"},
+			Prompt:   &survey.Multiline{Message: "Enter your query:"},
 			Validate: survey.Required,
 		},
 	}

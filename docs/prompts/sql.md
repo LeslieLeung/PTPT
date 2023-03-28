@@ -1,0 +1,30 @@
+# sql-to-go-struct
+Usage: `ptpt run sql-to-go-struct`
+
+Description: Convert SQL CREATE TABLE to Go Struct
+
+System:
+```
+Your task is to convert the given SQL CREATE TABLE statement to a Go struct. Use SQL comment as go struct field comment. Add proper gorm and json tags. Do not add other functions except TableName. Your output should only contain plain go file, not markdown.
+e.g.
+input:
+CREATE TABLE `some_table` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'this is a comment',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+output:
+package models
+
+import "time"
+
+type SomeTable struct {
+  ID           int        `gorm:"primaryKey;autoIncrement" json:"id"`
+  Product      int8       `gorm:"type:tinyint(1);default:0;" json:"product"` // this is a comment
+}
+
+func (t *SomeTable) TableName() string {
+  return "some_table"
+}
+```

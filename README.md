@@ -19,14 +19,21 @@
 - 让 ChatGPT 替你处理纯文本文件！
 - 预定义 Prompt
 - 方便分享和扩展的 Prompt 格式
+- 通过代理使用
+- 目前已有`13`种 prompt，欢迎贡献！
 
 已经支持的 prompt 一览
 
-- [x] 🧸角色扮演（仅供娱乐）
-- [x] 🧸问候语（仅供娱乐）
-- [x] 📝Markdown 翻译 - translate-markdown (e.g. [Hello_translated.md](example/Hello_translated.md))
-- [x] 📝csv 翻译成 csv - translate-csv (e.g. [example_translated.csv](example/example_translated.csv))
+- [x] 🧸角色扮演（仅供娱乐）- [role_play](docs/prompts/role_play.md)
+- [x] 🧸问候语（仅供娱乐）- [hello](docs/prompts/hello.md)
+- [x] 📝Markdown 翻译 - [translate](docs/prompts/translate.md)
+- [x] 📝csv 翻译成 csv - [translate](docs/prompts/translate.md)
 - [ ] 📝csv 翻译成 GNU po (WIP)
+- [x] 💻代码审查 - [code_review](docs/prompts/code_review.md)
+- [x] 💻json 转 go 结构体 - [json_converter](docs/prompts/json_converter.md)
+- [x] 📝生成 prompt 文档 - [prompt_doc](docs/prompts/prompt_doc.md)
+- [x] 💻生成 gorm 结构体 - [sql](docs/prompts/sql.md)
+
 
 ## 安装
 
@@ -36,9 +43,15 @@ go install github.com/leslieleung/ptpt
 
 ## 使用
 
-首先需要初始化 `OPENAI_API_KEY`，可以通过以下方式设置。
+首先需要初始化配置文件，在 `~/.ptpt/config.yaml` 中配置 ChatGPT 的 API 地址和代理地址。
 
-`export OPENAI_API_KEY="sk-xxxxxx"` 或 `echo "sk-xxxxxx" > 〜/.ptptcfg`。
+```yaml
+api_key: sk-xxxxx
+proxy_url: https://example.org/proxy/ # 可选，需要保留最后的/
+```
+
+> Windows: 如果下载了 ptpt.exe，在与可执行文件同一目录下放置一个config.yaml 文件即可。
+
 
 ### 交互式
 
@@ -81,8 +94,15 @@ prompts: # 定义的 prompt
 
 通过下载别人分享的 prompt，保存在 `~/.ptpt/prompt` 目录下后，即可使用更多的 prompt。
 
+### 生成 prompt 文档
+
+```bash
+> ptpt run prompt-doc prompt.yaml > prompt.md
+```
+
 ## Roadmap
-- [ ] 支持代理配置
+- [x] 支持代理配置
+- [ ] 优化使用体验
 - [ ] 支持ChatGPT参数配置
 - [ ] PromptHub - 通过 yaml 文件分享 prompt
 - [ ] 支持更多的 prompt

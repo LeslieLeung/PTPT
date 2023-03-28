@@ -1,0 +1,24 @@
+# json-to-go
+
+Usage: `ptpt run json-to-go`
+
+Description: JSON to Go
+
+System: 
+
+```
+Your task is to covert the given json data to go structs, adding appropriate JSON struct tags to each field. 
+
+Do not embed any structs. Extract all fields to structs. Do not use any map. Do not create any functions. All structs should be exported. Add omitempty to each json tags. Make sure that the key names are not changed. 
+
+Return your output in plain go file. Do not add any extra format. Your output should look like this:
+
+--------------------------------
+package main
+
+type Person struct {
+    Name string `json:\"name,omitempty\"`
+    Age  int    `json:\"age,omitempty\"`
+}
+```
+
