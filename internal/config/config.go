@@ -21,7 +21,12 @@ func Init() {
 	VP.AddConfigPath("$HOME/.ptpt")
 	err := VP.ReadInConfig()
 	if err != nil {
-		ui.ErrorfExit("Error reading config file, %s", err)
+		ui.Errorf("Seems like you haven't initialized the config file yet.")
+		CreateConfig()
+		err = VP.ReadInConfig()
+		if err != nil {
+			ui.ErrorfExit("Error reading config file, %s", err)
+		}
 	}
 	err = VP.Unmarshal(&ins)
 	if err != nil {
