@@ -1,13 +1,15 @@
 package config
 
 import (
+	"github.com/leslieleung/ptpt/internal/file"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/spf13/viper"
 )
 
 type Config struct {
-	APIKey   string `yaml:"api_key" mapstructure:"api_key"`
-	ProxyURL string `yaml:"proxy_url" mapstructure:"proxy_url"`
+	APIKey       string   `yaml:"api_key" mapstructure:"api_key"`
+	ProxyURL     string   `yaml:"proxy_url" mapstructure:"proxy_url"`
+	Subscription []string `yaml:"subscription" mapstructure:"subscription"`
 }
 
 var VP *viper.Viper
@@ -18,7 +20,7 @@ func Init() {
 	VP.SetConfigName("config")
 	VP.SetConfigType("yaml")
 	VP.AddConfigPath(".")
-	VP.AddConfigPath("$HOME/.ptpt")
+	VP.AddConfigPath(file.GetPTPTDir())
 	err := VP.ReadInConfig()
 	if err != nil {
 		ui.Errorf("Seems like you haven't initialized the config file yet.")

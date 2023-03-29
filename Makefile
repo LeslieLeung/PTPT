@@ -6,3 +6,5 @@ gox:
 .PHONY: clean
 clean:
 	rm -f build/ptpt_*
+
+release: gox

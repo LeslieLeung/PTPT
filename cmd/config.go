@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/leslieleung/ptpt/internal/config"
+	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/spf13/cobra"
 )
 
@@ -11,7 +12,7 @@ var configCmd = &cobra.Command{
 
 var initConfigCmd = &cobra.Command{
 	Use:    "init",
-	PreRun: toggleDebug,
+	PreRun: ui.ToggleDebug,
 	Run: func(cmd *cobra.Command, args []string) {
 		config.CreateConfig()
 	},

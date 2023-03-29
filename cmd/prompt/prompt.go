@@ -1,8 +1,9 @@
-package cmd
+package prompt
 
 import (
 	"bytes"
 	"github.com/AlecAivazis/survey/v2"
+	"github.com/leslieleung/ptpt/internal/file"
 	"github.com/leslieleung/ptpt/internal/prompt"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/leslieleung/ptpt/static"
@@ -14,9 +15,9 @@ import (
 	"path/filepath"
 )
 
-var promptCmd = &cobra.Command{
+var PromptCmd = &cobra.Command{
 	Use:    "prompt",
-	PreRun: toggleDebug,
+	PreRun: ui.ToggleDebug,
 	Run:    promptOpts,
 	Args:   cobra.MinimumNArgs(1),
 }
@@ -24,7 +25,7 @@ var promptCmd = &cobra.Command{
 func promptOpts(cmd *cobra.Command, args []string) {
 	switch args[0] {
 	case "load":
-		loadPrompt()
+		LoadPrompt()
 	case "create":
 		createPrompt()
 	default:
@@ -32,7 +33,7 @@ func promptOpts(cmd *cobra.Command, args []string) {
 	}
 }
 
-func loadPrompt() {
+func LoadPrompt() {
 	vp := viper.New()
 	vp.SetConfigType("yaml")
 	prompts := make(map[string]prompt.Prompt)
@@ -59,21 +60,22 @@ func loadPrompt() {
 		}
 	}
 	var dirPrompts []os.DirEntry
-	if _, err := os.Stat("prompts"); err != nil {
+	if _, err := os.Stat(file.GetPromptDir()); err != nil {
 		goto SumPrompts
 	}
-	dirPrompts, err = os.ReadDir("prompts")
+	dirPrompts, err = os.ReadDir(file.GetPromptDir())
 	if err != nil {
 		ui.ErrorfExit("Error reading external config file, %s", err)
 	}
+	log.Debugf("dir: %s", file.GetPromptDir())
 	for _, dirPrompt := range dirPrompts {
-		err := iterateDir(filepath.Join("prompts", dirPrompt.Name()), dirPrompt, vp, prompts)
+		err := iterateDir(filepath.Join(file.GetPromptDir(), dirPrompt.Name()), dirPrompt, vp, prompts)
 		if err != nil {
 			ui.ErrorfExit("Error reading external config file, %s", err)
 		}
 	}
 SumPrompts:
-	log.Debugf("[total %d]prompts: %+v", len(prompts), prompts)
+	log.Debugf("[total %d] prompts", len(prompts))
 	prompt.Lib = prompts
 }
 
@@ -162,5 +164,5 @@ func iterateDir(fName string, fInfo fs.DirEntry, vp *viper.Viper, prompts map[st
 }
 
 func init() {
-	rootCmd.AddCommand(promptCmd)
+	PromptCmd.AddCommand(subscribeCmd)
 }

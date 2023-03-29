@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/AlecAivazis/survey/v2"
+	promptcmd "github.com/leslieleung/ptpt/cmd/prompt"
 	"github.com/leslieleung/ptpt/internal/core"
 	"github.com/leslieleung/ptpt/internal/file"
 	"github.com/leslieleung/ptpt/internal/prompt"
@@ -16,9 +17,9 @@ import (
 
 var runCmd = &cobra.Command{
 	Use:    "run",
-	PreRun: toggleDebug,
+	PreRun: ui.ToggleDebug,
 	Run: func(cmd *cobra.Command, args []string) {
-		loadPrompt()
+		promptcmd.LoadPrompt()
 		run(args)
 	},
 }

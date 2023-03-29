@@ -17,10 +17,10 @@
 ## 功能
 
 - 让 ChatGPT 替你处理纯文本文件！
-- 预定义 Prompt
+- 预定义 Prompt （目前已有`14`种 prompt，欢迎贡献！）
 - 方便分享和扩展的 Prompt 格式
+- 🌟通过订阅获得更多 prompt
 - 通过代理使用
-- 目前已有`13`种 prompt，欢迎贡献！
 
 已经支持的 prompt 一览
 
@@ -33,6 +33,7 @@
 - [x] 💻json 转 go 结构体 - [json_converter](docs/prompts/json_converter.md)
 - [x] 📝生成 prompt 文档 - [prompt_doc](docs/prompts/prompt_doc.md)
 - [x] 💻生成 gorm 结构体 - [sql](docs/prompts/sql.md)
+- [x] 💻生成正则表达式 - [regex](docs/prompts/regex.md)
 
 
 ## 安装
@@ -43,15 +44,17 @@ go install github.com/leslieleung/ptpt
 
 ## 使用
 
-首先需要初始化配置文件，在 `~/.ptpt/config.yaml` 中配置 ChatGPT 的 API 地址和代理地址。
+初次使用请根据提示配置 `api_key` 和 `proxy_url` （可选）。
 
-```yaml
-api_key: sk-xxxxx
-proxy_url: https://example.org/proxy/ # 可选，需要保留最后的/
+## 订阅 prompt
+
+```bash
+> ptpt prompt subscribe https://raw.githubusercontent.com/LeslieLeung/pt-collection/main/awesome-chatgpt-prompts/awesome-chatgpt-prompts.yaml
 ```
 
-> Windows: 如果下载了 ptpt.exe，在与可执行文件同一目录下放置一个config.yaml 文件即可。
+能够订阅 [f/awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) 的所有 prompt。
 
+后续会更新更多的订阅，欢迎关注 [pt-collection](https://github.com/LeslieLeung/pt-collection)，该项目每天 UTC 0 会自动更新同步上游的 prompt。
 
 ### 交互式
 
@@ -92,12 +95,22 @@ prompts: # 定义的 prompt
     system: You are Spock from Star Trek, you must speak in his tongue.
 ```
 
-通过下载别人分享的 prompt，保存在 `~/.ptpt/prompt` 目录下后，即可使用更多的 prompt。
+通过下载别人分享的 prompt，保存在 `ptpt/prompt` 目录下后，即可使用更多的 prompt。
 
 ### 生成 prompt 文档
 
 ```bash
 > ptpt run prompt-doc prompt.yaml > prompt.md
+```
+
+## 配置文件
+
+`ptpt` 默认的配置文件目录如下，暂不支持更改。
+
+```
+Windows: %APPDATA%\ptpt
+macOS: $HOME/Library/Application Support/ptpt
+Linux: $HOME/.config/ptpt
 ```
 
 ## Roadmap
