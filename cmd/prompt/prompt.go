@@ -88,7 +88,12 @@ type promptForm struct {
 
 func createPrompt() {
 	var createFileName string
-	err := survey.AskOne(&survey.Input{Message: "Prompt file name:"}, &createFileName, survey.WithValidator(survey.Required))
+	err := survey.AskOne(&survey.Input{
+		Message: "Prompt file name:",
+		Default: filepath.Join(file.GetPromptDir(), "default.yaml"),
+		Help:    "Absolute path to the prompt file.",
+	},
+		&createFileName, survey.WithValidator(survey.Required))
 	if err != nil {
 		ui.ErrorfExit("Malformed file name: %s", err)
 	}

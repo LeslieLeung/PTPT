@@ -39,9 +39,11 @@ func CreateConfig() {
 	vp := viper.New()
 	vp.Set("api_key", answers.ApiKey)
 	vp.Set("proxy_url", answers.ProxyURL)
-	err = os.Mkdir(file.GetPTPTDir(), 0o755)
-	if err != nil {
-		ui.ErrorfExit("Failed to create config: %v", err)
+	if _, err := os.Stat(file.GetPTPTDir()); err != nil {
+		err = os.Mkdir(file.GetPTPTDir(), 0o755)
+		if err != nil {
+			ui.ErrorfExit("Failed to create config: %v", err)
+		}
 	}
 	err = vp.WriteConfigAs(filepath.Join(file.GetPTPTDir(), "config.yaml"))
 	if err != nil {

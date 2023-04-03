@@ -72,11 +72,13 @@ ptpt run [prompt] [inFile] [outFile]
 
 ### 创造你自己的 prompt
 
-#### 通过交互式创建(WIP)
+#### 通过交互式创建
 
 ```bash
 > ptpt prompt create
 ```
+
+生成的 prompt yaml 文件会保存在 `ptpt/prompt` 目录下。
 
 #### 格式说明
 

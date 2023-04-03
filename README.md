@@ -75,10 +75,12 @@ ptpt run [prompt] [inFile] [outFile]
 
 ### Create your own prompt
 
-#### Interactively(WIP)
+#### Interactively
 ```bash
 > ptpt prompt create
 ```
+
+The generated prompt yaml would be saved to `ptpt/prompt` directory.
 
 #### Syntax
 
