@@ -11,11 +11,12 @@ PTPT 提供了多种预定义 prompt，以及方便分享和扩展的 prompt 格
 ## 功能
 
 - 让 ChatGPT 替你处理纯文本文件！
-- 预定义 prompt （目前已有`14`种 prompt，欢迎贡献！）
+- 预定义 prompt （目前已有`16`种 prompt，欢迎贡献！）
 - 方便分享和扩展的 prompt 格式
 - 🌟通过订阅获得更多 prompt
 - 🌟开发更多有用有趣的 prompt，并通过 PTPT 管理你的 prompt
 - 通过代理使用
+- 🌟使用 ChatGPT 检查你的代码！
 
 已经支持的 prompt 一览
 
@@ -34,12 +35,33 @@ PTPT 提供了多种预定义 prompt，以及方便分享和扩展的 prompt 格
 ## 安装
 
 ```bash
-go install github.com/leslieleung/ptpt
+go install github.com/leslieleung/ptpt@latest
 ```
+
+或从 [Release](https://github.com/LeslieLeung/PTPT/releases) 下载
+
+## 使用案例
+
+### ChatGPT Lint
+
+```bash
+> ptpt lint <file>
+> ptpt lint -l zh <file> # 中文建议
+```
+
+![](example/lint_example.png)
 
 ## 使用
 
 初次使用请根据提示配置 `api_key` 和 `proxy_url` （可选）。
+
+### 设置 Temperature
+
+设置 ChatGPT 的 Temperature。 默认值为 `0.7`。
+
+```bash
+> ptpt run lint <file> -t 0.8
+```
 
 ### 订阅 prompt
 

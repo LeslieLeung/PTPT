@@ -12,9 +12,12 @@ import (
 )
 
 type OpenAI struct {
-	client *openai.Client
-	once   sync.Once
+	client      *openai.Client
+	once        sync.Once
+	temperature float32
 }
+
+var Temperature float32
 
 func (o *OpenAI) getClient() *openai.Client {
 	cfg := config.GetIns()
@@ -30,13 +33,15 @@ func (o *OpenAI) getClient() *openai.Client {
 			o.client = openai.NewClient(cfg.APIKey)
 		}
 	})
+	o.temperature = Temperature
 	return o.client
 }
 
 func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.ChatCompletionMessage) (string, error) {
 	resp, err := o.getClient().CreateChatCompletion(ctx, openai.ChatCompletionRequest{
-		Model:    openai.GPT3Dot5Turbo0301,
-		Messages: messages,
+		Model:       openai.GPT3Dot5Turbo0301,
+		Messages:    messages,
+		Temperature: o.temperature,
 	})
 	if err != nil {
 		return "", err
@@ -45,4 +50,8 @@ func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.Cha
 		resp.Usage.PromptTokens, resp.Usage.CompletionTokens, resp.Usage.TotalTokens)
 	log.Debugf("Response: %+v", resp)
 	return resp.Choices[0].Message.Content, nil
+}
+
+func (o *OpenAI) SetTemperature(t float32) {
+	o.temperature = t
 }

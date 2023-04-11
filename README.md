@@ -12,11 +12,12 @@ If you're interested in prompt engineering, you can use PTPT to develop and shar
 ## Features
 
 - Let ChatGPT handle plain text files for you!
-- Predefined prompts (currently with `14` prompts, contributions welcome!)
+- Predefined prompts (currently with `16` prompts, contributions welcome!)
 - Convenient sharing and extension of prompts format
 - 🌟Get more prompts by subscribing
 - 🌟Develop and manage your prompts
 - Use via proxy
+- 🌟Lint your code with ChatGPT!
 
 List of Prompts currently supported:
 
@@ -35,12 +36,32 @@ List of Prompts currently supported:
 ## Installation
 
 ```bash
-go install github.com/leslieleung/ptpt
+go install github.com/leslieleung/ptpt@latest
 ```
+
+Or download from [Release](https://github.com/LeslieLeung/PTPT/releases)
+
+## Featured Usages
+
+### ChatGPT Lint
+
+```bash
+> ptpt lint <file>
+```
+
+![](example/lint_example.png)
 
 ## Usage
 
 For first-time use, please configure `api_key` and `proxy_url` (optional) according to the wizard.
+
+### Set Temperature
+
+Set the temperature of ChatGPT. The default value is `0.7`.
+
+```bash
+> ptpt run lint <file> -t 0.8
+```
 
 ### Subscribe Prompts
 

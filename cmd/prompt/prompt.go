@@ -70,7 +70,7 @@ func LoadPrompt() {
 SumPrompts:
 	log.Debugf("[total %d] prompts", len(prompts))
 	prompt.Lib = prompts
-	ui.Printf("Loaded %d prompts", len(prompts))
+	log.Debugf("Loaded %d prompts", len(prompts))
 }
 
 type promptForm struct {
