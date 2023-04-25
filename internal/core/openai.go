@@ -49,6 +49,9 @@ func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.Cha
 	log.Debugf("Token Usage [Prompt: %d, Completion: %d, Total: %d]",
 		resp.Usage.PromptTokens, resp.Usage.CompletionTokens, resp.Usage.TotalTokens)
 	log.Debugf("Response: %+v", resp)
+	if len(resp.Choices) == 0 {
+		return "", nil
+	}
 	return resp.Choices[0].Message.Content, nil
 }
 
