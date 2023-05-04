@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/leslieleung/ptpt/cmd/chat"
 	"github.com/leslieleung/ptpt/cmd/lint"
 	"github.com/leslieleung/ptpt/cmd/prompt"
 	"github.com/leslieleung/ptpt/internal/core"
@@ -25,6 +26,7 @@ func Execute() {
 func init() {
 	rootCmd.AddCommand(prompt.PromptCmd)
 	rootCmd.AddCommand(lint.LintCmd)
+	rootCmd.AddCommand(chat.ChatCmd)
 
 	rootCmd.PersistentFlags().BoolVarP(&ui.Verbose, "verbose", "v", false, "verbose output")
 	rootCmd.PersistentFlags().Float32VarP(&core.Temperature, "temperature", "t", 0.7, "temperature of the prompt")

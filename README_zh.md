@@ -17,6 +17,7 @@ PTPT 提供了多种预定义 prompt，以及方便分享和扩展的 prompt 格
 - 🌟开发更多有用有趣的 prompt，并通过 PTPT 管理你的 prompt
 - 通过代理使用
 - 🌟使用 ChatGPT 检查你的代码！
+- 🌟在终端中与 ChatGPT 聊天！
 
 已经支持的 prompt 一览
 
@@ -51,6 +52,12 @@ go install github.com/leslieleung/ptpt@latest
 ```
 
 ![](example/lint_example.png)
+
+### ChatGPT 聊天
+
+```bash
+> ptpt chat
+```
 
 ## 使用
 

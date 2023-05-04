@@ -18,6 +18,7 @@ If you're interested in prompt engineering, you can use PTPT to develop and shar
 - 🌟Develop and manage your prompts
 - Use via proxy
 - 🌟Lint your code with ChatGPT!
+- 🌟Chat with ChatGPT in your terminal!
 
 List of Prompts currently supported:
 
@@ -51,6 +52,12 @@ Or download from [Release](https://github.com/LeslieLeung/PTPT/releases)
 ```
 
 ![](example/lint_example.png)
+
+### Chat With ChatGPT
+
+```bash
+> ptpt chat
+```
 
 ## Usage
 

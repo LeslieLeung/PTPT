@@ -12,6 +12,7 @@ import (
 	"github.com/sashabaranov/go-openai"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"os"
 	"sort"
 )
 
@@ -141,7 +142,7 @@ func handleThreeArgs(args []string) {
 }
 
 func doPrompt(promptName string, in string) string {
-	spinner := ui.MakeSpinner()
+	spinner := ui.MakeSpinner(os.Stderr)
 	spinner.Suffix = " Waiting for ChatGPT response..."
 	spinner.Start()
 	client := core.OpenAI{}
@@ -149,7 +150,7 @@ func doPrompt(promptName string, in string) string {
 	if !ok {
 		ui.ErrorfExit("prompt %s not found", promptName)
 	}
-	resp, err := client.CreateChatCompletion(context.Background(), []openai.ChatCompletionMessage{
+	resp, _, err := client.CreateChatCompletion(context.Background(), []openai.ChatCompletionMessage{
 		{
 			Role:    openai.ChatMessageRoleSystem,
 			Content: p.System,

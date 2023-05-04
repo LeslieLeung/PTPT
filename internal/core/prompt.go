@@ -5,11 +5,12 @@ import (
 	"github.com/leslieleung/ptpt/internal/prompt"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/sashabaranov/go-openai"
+	"os"
 	"strings"
 )
 
 func DoPrompt(promptName string, in string, variables map[string]string) string {
-	spinner := ui.MakeSpinner()
+	spinner := ui.MakeSpinner(os.Stderr)
 	spinner.Suffix = " Waiting for ChatGPT response..."
 	spinner.Start()
 	client := OpenAI{}
@@ -20,7 +21,7 @@ func DoPrompt(promptName string, in string, variables map[string]string) string 
 	for k, v := range variables {
 		p.System = strings.Replace(p.System, k, v, 1)
 	}
-	resp, err := client.CreateChatCompletion(context.Background(), []openai.ChatCompletionMessage{
+	resp, _, err := client.CreateChatCompletion(context.Background(), []openai.ChatCompletionMessage{
 		{
 			Role:    openai.ChatMessageRoleSystem,
 			Content: p.System,

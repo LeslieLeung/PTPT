@@ -10,7 +10,7 @@ import (
 
 // SaveFile downloads a file from a given url and saves it to a given path.
 func SaveFile(url, path string) {
-	spinner := ui.MakeSpinner()
+	spinner := ui.MakeSpinner(os.Stderr)
 	spinner.Suffix = fmt.Sprintf(" Downloading %s", url)
 	spinner.Start()
 	response, err := http.Get(url)

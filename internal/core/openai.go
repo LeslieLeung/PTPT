@@ -37,22 +37,22 @@ func (o *OpenAI) getClient() *openai.Client {
 	return o.client
 }
 
-func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.ChatCompletionMessage) (string, error) {
+func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.ChatCompletionMessage) (string, Usage, error) {
 	resp, err := o.getClient().CreateChatCompletion(ctx, openai.ChatCompletionRequest{
 		Model:       openai.GPT3Dot5Turbo0301,
 		Messages:    messages,
 		Temperature: o.temperature,
 	})
 	if err != nil {
-		return "", err
+		return "", Usage{}, err
 	}
 	log.Debugf("Token Usage [Prompt: %d, Completion: %d, Total: %d]",
 		resp.Usage.PromptTokens, resp.Usage.CompletionTokens, resp.Usage.TotalTokens)
 	log.Debugf("Response: %+v", resp)
 	if len(resp.Choices) == 0 {
-		return "", nil
+		return "", Usage{}, nil
 	}
-	return resp.Choices[0].Message.Content, nil
+	return resp.Choices[0].Message.Content, Usage(resp.Usage), nil
 }
 
 func (o *OpenAI) SetTemperature(t float32) {
