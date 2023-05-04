@@ -12,7 +12,7 @@ If you're interested in prompt engineering, you can use PTPT to develop and shar
 ## Features
 
 - Let ChatGPT handle plain text files for you!
-- Predefined prompts (currently with `16` prompts, contributions welcome!)
+- Predefined prompts (currently with `18` prompts, contributions welcome!)
 - Convenient sharing and extension of prompts format
 - 🌟Get more prompts by subscribing
 - 🌟Develop and manage your prompts
@@ -31,6 +31,7 @@ List of Prompts currently supported:
 - [x] 📝Generate prompt documentation - [prompt_doc](docs/prompts/prompt_doc.md)
 - [x] 💻Generate gorm struct - [sql](docs/prompts/sql.md)
 - [x] 💻Generate regular expression - [regex](docs/prompts/regex.md)
+- [x] 💻Generate summarize and SEO keywords
 
 
 ## Installation

@@ -11,7 +11,7 @@ PTPT 提供了多种预定义 prompt，以及方便分享和扩展的 prompt 格
 ## 功能
 
 - 让 ChatGPT 替你处理纯文本文件！
-- 预定义 prompt （目前已有`16`种 prompt，欢迎贡献！）
+- 预定义 prompt （目前已有`18`种 prompt，欢迎贡献！）
 - 方便分享和扩展的 prompt 格式
 - 🌟通过订阅获得更多 prompt
 - 🌟开发更多有用有趣的 prompt，并通过 PTPT 管理你的 prompt
@@ -30,6 +30,7 @@ PTPT 提供了多种预定义 prompt，以及方便分享和扩展的 prompt 格
 - [x] 📝生成 prompt 文档 - [prompt_doc](docs/prompts/prompt_doc.md)
 - [x] 💻生成 gorm 结构体 - [sql](docs/prompts/sql.md)
 - [x] 💻生成正则表达式 - [regex](docs/prompts/regex.md)
+- [x] 💻生成文章摘要和 SEO 关键词
 
 
 ## 安装
