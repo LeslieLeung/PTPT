@@ -48,10 +48,19 @@ Or download from [Release](https://github.com/LeslieLeung/PTPT/releases)
 ### ChatGPT Lint
 
 ```bash
-> ptpt lint <file>
+> ptpt lint <file-or-path>
 ```
 
 ![](example/lint_example.png)
+
+> *As of `v0.1.5` , you can use the diff feature to lint the changes in the git repository.*
+> This feature relies on git, make sure `git` is usable.
+
+```bash
+> ptpt lint -d # default to HEAD
+> ptpt lint -d <other git diff params>
+```
+
 
 ### Chat With ChatGPT
 

@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.6
+	github.com/avast/retry-go/v4 v4.3.4
 	github.com/briandowns/spinner v1.23.0
 	github.com/gookit/color v1.5.3
 	github.com/sashabaranov/go-openai v1.9.0

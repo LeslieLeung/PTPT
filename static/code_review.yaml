@@ -37,6 +37,8 @@ prompts:
 
     e.g.
     cmd/prompt.run.go:39:12: Advice: simplify switch case
+    
+    If no bug or typo is found, output: No obvious bug found.
     "
 
   - name: lint-zh

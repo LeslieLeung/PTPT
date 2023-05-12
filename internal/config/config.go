@@ -1,3 +1,5 @@
+//go:build !private
+
 package config
 
 import (

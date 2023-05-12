@@ -53,6 +53,15 @@ go install github.com/leslieleung/ptpt@latest
 
 ![](example/lint_example.png)
 
+> *自 `v0.1.5` 以后, 可以使用 diff 来检查 git 仓库中的代码变更。*
+> 此功能依赖 `git`，请保证 `git` 已经安装并配置好。
+
+```bash
+> ptpt lint -d # 默认比较 HEAD
+> ptpt lint -d <other git diff params>
+```
+
+
 ### ChatGPT 聊天
 
 ```bash

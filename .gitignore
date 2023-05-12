@@ -1,2 +1,4 @@
 .idea
 build
+
+*_private.go

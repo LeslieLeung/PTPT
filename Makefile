@@ -7,4 +7,8 @@ gox:
 clean:
 	rm -f build/ptpt_*
 
+.PHONY: priv
+priv:
+	gox -osarch="darwin/amd64 darwin/arm64 linux/amd64 linux/arm64 windows/amd64" -output="build/ptpt_private_{{.OS}}_{{.Arch}}" -tags=private
+
 release: gox

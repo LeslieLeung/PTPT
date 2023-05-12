@@ -2,6 +2,7 @@ package core
 
 import (
 	"context"
+	"github.com/avast/retry-go/v4"
 	"github.com/leslieleung/ptpt/internal/config"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/sashabaranov/go-openai"
@@ -38,14 +39,19 @@ func (o *OpenAI) getClient() *openai.Client {
 }
 
 func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.ChatCompletionMessage) (string, Usage, error) {
-	resp, err := o.getClient().CreateChatCompletion(ctx, openai.ChatCompletionRequest{
-		Model:       openai.GPT3Dot5Turbo0301,
-		Messages:    messages,
-		Temperature: o.temperature,
-	})
-	if err != nil {
-		return "", Usage{}, err
-	}
+	var resp openai.ChatCompletionResponse
+	var err error
+	err = retry.Do(func() error {
+		resp, err = o.getClient().CreateChatCompletion(ctx, openai.ChatCompletionRequest{
+			Model:       openai.GPT3Dot5Turbo0301,
+			Messages:    messages,
+			Temperature: o.temperature,
+		})
+		if err != nil {
+			return err
+		}
+		return nil
+	}, retry.Attempts(3), retry.Delay(1))
 	log.Debugf("Token Usage [Prompt: %d, Completion: %d, Total: %d]",
 		resp.Usage.PromptTokens, resp.Usage.CompletionTokens, resp.Usage.TotalTokens)
 	log.Debugf("Response: %+v", resp)
