@@ -2,6 +2,8 @@
 
 English | [简体中文](README_zh.md)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=LeslieLeung_PTPT&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=LeslieLeung_PTPT)
+
 ## Introduction
 
 PTPT is an command-line tool that allows you to easily convert plain text files using pre-defined prompts with the help of ChatGPT. 

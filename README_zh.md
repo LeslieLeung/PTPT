@@ -2,6 +2,8 @@
 
 [English](README.md) | 简体中文
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=LeslieLeung_PTPT&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=LeslieLeung_PTPT)
+
 ## 简介
 
 PTPT 是一个命令行工具，旨在为你提供一个简单的方式，让 ChatGPT 处理纯文本文件。
