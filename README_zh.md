@@ -12,6 +12,8 @@ PTPT 提供了多种预定义 prompt，以及方便分享和扩展的 prompt 格
 
 ## 功能
 
+> 如果你还没有 GPT-4 的访问权限，你可以试试 [AIProxy](https://aiproxy.io/)。
+
 - 让 ChatGPT 替你处理纯文本文件！
 - 预定义 prompt （目前已有`18`种 prompt，欢迎贡献！）
 - 方便分享和扩展的 prompt 格式

@@ -13,6 +13,8 @@ If you're interested in prompt engineering, you can use PTPT to develop and shar
 
 ## Features
 
+> If you don't have access to GPT-4 yet, you can try [AIProxy](https://aiproxy.io/).
+
 - Let ChatGPT handle plain text files for you!
 - Predefined prompts (currently with `18` prompts, contributions welcome!)
 - Convenient sharing and extension of prompts format

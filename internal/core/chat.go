@@ -2,9 +2,12 @@ package core
 
 import (
 	"context"
+	"errors"
+	"github.com/gookit/color"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/sashabaranov/go-openai"
-	"os"
+	"io"
+	"strings"
 )
 
 type Usage openai.Usage
@@ -29,20 +32,31 @@ func (c *Chat) AddMessage(msg openai.ChatCompletionMessage) {
 	c.History = append(c.History, msg)
 }
 
-func (c *Chat) CreateResponse() string {
-	spinner := ui.MakeSpinner(os.Stdout)
-	spinner.Suffix = " Waiting for ChatGPT response..."
-	spinner.Start()
+func (c *Chat) CreateResponse() {
 	client := OpenAI{}
-	resp, usage, err := client.CreateChatCompletion(context.Background(), c.History)
+	resp, err := client.StreamChatCompletion(context.Background(), c.History)
 	if err != nil {
 		ui.ErrorfExit("error creating completion: %s", err)
 	}
-	spinner.Stop()
-	c.Usage.Add(usage)
+	defer resp.Close()
+
+	color.Blue.Printf("ChatGPT: \n")
+	var fullResp strings.Builder
+	for {
+		r, err := resp.Recv()
+		if errors.Is(err, io.EOF) {
+			break
+		}
+		if err != nil {
+			ui.ErrorfExit("error receiving completion: %s", err)
+			return
+		}
+		color.Blue.Printf(r.Choices[0].Delta.Content)
+		fullResp.WriteString(r.Choices[0].Delta.Content)
+	}
+
 	c.History = append(c.History, openai.ChatCompletionMessage{
 		Role:    openai.ChatMessageRoleAssistant,
-		Content: resp,
+		Content: fullResp.String(),
 	})
-	return resp
 }

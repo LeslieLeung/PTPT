@@ -18,7 +18,10 @@ type OpenAI struct {
 	temperature float32
 }
 
-var Temperature float32
+var (
+	Temperature float32
+	Model       string
+)
 
 func (o *OpenAI) getClient() *openai.Client {
 	cfg := config.GetIns()
@@ -43,7 +46,7 @@ func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.Cha
 	var err error
 	err = retry.Do(func() error {
 		resp, err = o.getClient().CreateChatCompletion(ctx, openai.ChatCompletionRequest{
-			Model:       openai.GPT3Dot5Turbo0301,
+			Model:       Model,
 			Messages:    messages,
 			Temperature: o.temperature,
 		})
@@ -59,6 +62,14 @@ func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.Cha
 		return "", Usage{}, nil
 	}
 	return resp.Choices[0].Message.Content, Usage(resp.Usage), nil
+}
+
+func (o *OpenAI) StreamChatCompletion(ctx context.Context, messages []openai.ChatCompletionMessage) (*openai.ChatCompletionStream, error) {
+	return o.getClient().CreateChatCompletionStream(ctx, openai.ChatCompletionRequest{
+		Model:    Model,
+		Messages: messages,
+		Stream:   true,
+	})
 }
 
 func (o *OpenAI) SetTemperature(t float32) {

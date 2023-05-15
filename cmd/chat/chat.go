@@ -3,7 +3,6 @@ package chat
 import (
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
-	"github.com/gookit/color"
 	"github.com/leslieleung/ptpt/internal/core"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/sashabaranov/go-openai"
@@ -38,11 +37,10 @@ func chat(cmd *cobra.Command, args []string) {
 			Role:    openai.ChatMessageRoleUser,
 			Content: input,
 		})
-		resp := chatStruct.CreateResponse()
-		color.Blue.Printf("ChatGPT: \n%s\n", resp)
+		chatStruct.CreateResponse()
 	}
 }
 
 func postChatHook(cmd *cobra.Command, args []string) {
-	ui.Printf("Total tokens used: %d\n", chatStruct.Usage.TotalTokens)
+	//ui.Printf("Total tokens used: %d\n", chatStruct.Usage.TotalTokens)
 }
