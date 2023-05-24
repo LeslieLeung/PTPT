@@ -54,6 +54,7 @@ func (c *Chat) CreateResponse() {
 		color.Blue.Printf(r.Choices[0].Delta.Content)
 		fullResp.WriteString(r.Choices[0].Delta.Content)
 	}
+	color.Blue.Println()
 
 	c.History = append(c.History, openai.ChatCompletionMessage{
 		Role:    openai.ChatMessageRoleAssistant,
