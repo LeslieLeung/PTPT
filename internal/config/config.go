@@ -11,6 +11,7 @@ import (
 type Config struct {
 	APIKey       string   `yaml:"api_key" mapstructure:"api_key"`
 	ProxyURL     string   `yaml:"proxy_url" mapstructure:"proxy_url"`
+	Proxy        string   `yaml:"proxy" mapstructure:"proxy"`
 	Subscription []string `yaml:"subscription" mapstructure:"subscription"`
 }
 
