@@ -21,6 +21,7 @@ func (u *Usage) Add(other Usage) {
 type Chat struct {
 	History []openai.ChatCompletionMessage
 	Usage   Usage
+	Single  bool
 }
 
 func (c *Chat) Init() {
@@ -29,7 +30,11 @@ func (c *Chat) Init() {
 }
 
 func (c *Chat) AddMessage(msg openai.ChatCompletionMessage) {
-	c.History = append(c.History, msg)
+	if !c.Single || len(c.History) == 0 {
+		c.History = append(c.History, msg)
+		return
+	}
+	c.History[0] = msg
 }
 
 func (c *Chat) CreateResponse() {
@@ -56,7 +61,7 @@ func (c *Chat) CreateResponse() {
 	}
 	color.Blue.Println()
 
-	c.History = append(c.History, openai.ChatCompletionMessage{
+	c.AddMessage(openai.ChatCompletionMessage{
 		Role:    openai.ChatMessageRoleAssistant,
 		Content: fullResp.String(),
 	})
