@@ -21,7 +21,6 @@ func Init() {
 	VP = viper.New()
 	VP.SetConfigName("config")
 	VP.SetConfigType("yaml")
-	VP.AddConfigPath(".")
 	VP.AddConfigPath(file.GetPTPTDir())
 	err := VP.ReadInConfig()
 	if err != nil {
