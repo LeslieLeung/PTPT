@@ -2,14 +2,17 @@ package core
 
 import (
 	"context"
+	"net/http"
+	"net/url"
+	"path/filepath"
+	"sync"
+
 	"github.com/avast/retry-go/v4"
 	"github.com/leslieleung/ptpt/internal/config"
+	"github.com/leslieleung/ptpt/internal/file"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/sashabaranov/go-openai"
 	log "github.com/sirupsen/logrus"
-	"os"
-	"path/filepath"
-	"sync"
 )
 
 type OpenAI struct {
@@ -26,16 +29,20 @@ var (
 func (o *OpenAI) getClient() *openai.Client {
 	cfg := config.GetIns()
 	if cfg.APIKey == "" {
-		ui.ErrorfExit("API key is not set. Please set it in %s", filepath.Join(os.Getenv("HOME"), ".ptpt", "config.yaml"))
+		ui.ErrorfExit("API key is not set. Please set it in %s", filepath.Join(file.GetPTPTDir(), "config.yaml"))
 	}
 	o.once.Do(func() {
+		c := openai.DefaultConfig(cfg.APIKey)
 		if cfg.ProxyURL != "" {
-			c := openai.DefaultConfig(cfg.APIKey)
-			c.BaseURL = cfg.ProxyURL + "v1"
-			o.client = openai.NewClientWithConfig(c)
-		} else {
-			o.client = openai.NewClient(cfg.APIKey)
+			c.BaseURL, _ = url.JoinPath(cfg.ProxyURL, "v1")
 		}
+		if cfg.Proxy != "" {
+			proxy, _ := url.Parse(cfg.Proxy)
+			c.HTTPClient.Transport = &http.Transport{
+				Proxy: http.ProxyURL(proxy),
+			}
+		}
+		o.client = openai.NewClientWithConfig(c)
 	})
 	o.temperature = Temperature
 	return o.client

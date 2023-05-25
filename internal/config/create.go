@@ -12,6 +12,7 @@ import (
 type answerStruct struct {
 	ApiKey   string `survey:"api_key"`
 	ProxyURL string `survey:"proxy_url"`
+	Proxy    string `survey:"proxy"`
 }
 
 func CreateConfig() {
@@ -30,6 +31,13 @@ func CreateConfig() {
 				Help:    "Your url should look like this: https://example.com/proxy/, don't forget the '/'",
 			},
 		},
+		{
+			Name: "proxy",
+			Prompt: &survey.Input{
+				Message: "Enter your proxy (optional):",
+				Help:    "Enter the proxy server, for example: http:// 127.0.0.1:1080",
+			},
+		},
 	}
 	answers := answerStruct{}
 	err := survey.Ask(qs, &answers)
@@ -39,6 +47,7 @@ func CreateConfig() {
 	vp := viper.New()
 	vp.Set("api_key", answers.ApiKey)
 	vp.Set("proxy_url", answers.ProxyURL)
+	vp.Set("proxy", answers.Proxy)
 	if _, err := os.Stat(file.GetPTPTDir()); err != nil {
 		err = os.Mkdir(file.GetPTPTDir(), 0o755)
 		if err != nil {

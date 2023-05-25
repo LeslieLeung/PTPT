@@ -1,6 +1,7 @@
 package chat
 
 import (
+	"bytes"
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/leslieleung/ptpt/internal/core"
@@ -14,16 +15,24 @@ var ChatCmd = &cobra.Command{
 	Run:     chat,
 	PostRun: postChatHook,
 }
+var (
+	singleChat bool
+)
 
 var chatStruct core.Chat
 
 func chat(cmd *cobra.Command, args []string) {
 	chatStruct = core.Chat{}
 	chatStruct.Init()
+	chatStruct.Single = singleChat
 	input := ""
+	msg := bytes.NewBufferString("Talk to ChatGPT...")
+	if singleChat {
+		msg.WriteString(" [Single]")
+	}
 	for {
 		prompt := &survey.Multiline{
-			Message: "Talk to ChatGPT...",
+			Message: msg.String(),
 			Help:    "Press Ctrl+C to exit.",
 		}
 		err := survey.AskOne(prompt, &input)
@@ -43,4 +52,8 @@ func chat(cmd *cobra.Command, args []string) {
 
 func postChatHook(cmd *cobra.Command, args []string) {
 	//ui.Printf("Total tokens used: %d\n", chatStruct.Usage.TotalTokens)
+}
+
+func init() {
+	ChatCmd.Flags().BoolVarP(&singleChat, "single", "s", false, "close continuous dialogue")
 }
