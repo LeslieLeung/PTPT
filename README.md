@@ -65,6 +65,15 @@ Or download from [Release](https://github.com/LeslieLeung/PTPT/releases)
 > ptpt lint -d <other git diff params>
 ```
 
+### Generate Commit Message
+
+```bash
+# You still have to add files to stage manually
+> git add .
+# Let ptpt do the magic
+> ptpt commit
+```
+
 
 ### Chat With ChatGPT
 

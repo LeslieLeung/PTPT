@@ -66,6 +66,14 @@ go install github.com/leslieleung/ptpt@latest
 ```
 
 
+### 生成 commit message
+
+```bash
+> git add .
+> ptpt commit
+```
+
+
 ### ChatGPT 聊天
 
 ```bash
