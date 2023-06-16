@@ -6,7 +6,7 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 	promptcmd "github.com/leslieleung/ptpt/cmd/prompt"
 	"github.com/leslieleung/ptpt/internal/core"
-	"github.com/leslieleung/ptpt/internal/file"
+	"github.com/leslieleung/ptpt/internal/interract"
 	"github.com/leslieleung/ptpt/internal/prompt"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/sashabaranov/go-openai"
@@ -118,7 +118,7 @@ func handleSingleArg(args []string) {
 func handleTwoArgs(args []string) {
 	promptName = args[0]
 	inFileName = args[1]
-	input, err := file.ReadFromFile(inFileName)
+	input, err := interract.ReadFromFile(inFileName)
 	if err != nil {
 		ui.ErrorfExit("error reading file %s: %s", inFileName, err)
 	}
@@ -130,12 +130,12 @@ func handleThreeArgs(args []string) {
 	promptName = args[0]
 	inFileName = args[1]
 	outFileName = args[2]
-	input, err := file.ReadFromFile(inFileName)
+	input, err := interract.ReadFromFile(inFileName)
 	if err != nil {
 		ui.ErrorfExit("error reading file %s: %s", inFileName, err)
 	}
 	resp := doPrompt(promptName, input)
-	err = file.WriteToFile(outFileName, resp)
+	err = interract.WriteToFile(outFileName, resp)
 	if err != nil {
 		ui.ErrorfExit("error writing to file %s: %s", outFileName, err)
 	}

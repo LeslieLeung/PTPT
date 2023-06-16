@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/leslieleung/ptpt/cmd/chat"
+	"github.com/leslieleung/ptpt/cmd/cli"
 	"github.com/leslieleung/ptpt/cmd/commit"
 	"github.com/leslieleung/ptpt/cmd/lint"
 	"github.com/leslieleung/ptpt/cmd/prompt"
@@ -30,8 +31,9 @@ func init() {
 	rootCmd.AddCommand(lint.LintCmd)
 	rootCmd.AddCommand(chat.ChatCmd)
 	rootCmd.AddCommand(commit.Cmd)
+	rootCmd.AddCommand(cli.Cmd)
 
 	rootCmd.PersistentFlags().BoolVarP(&ui.Verbose, "verbose", "v", false, "verbose output")
 	rootCmd.PersistentFlags().Float32VarP(&core.Temperature, "temperature", "t", 0.2, "temperature of the prompt")
-	rootCmd.PersistentFlags().StringVarP(&core.Model, "model", "m", openai.GPT3Dot5Turbo0301, "model to use, recommend list of models [gpt-3.5-turbo-0301(default), gpt-4-0314, gpt-4-32k-0314]")
+	rootCmd.PersistentFlags().StringVarP(&core.Model, "model", "m", openai.GPT3Dot5Turbo0613, "model to use, recommend list of models [gpt-3.5-turbo-0613(default), gpt-4-0314, gpt-4-32k-0314]")
 }

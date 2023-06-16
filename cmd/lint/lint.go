@@ -4,7 +4,7 @@ import (
 	"fmt"
 	promptcmd "github.com/leslieleung/ptpt/cmd/prompt"
 	"github.com/leslieleung/ptpt/internal/core"
-	"github.com/leslieleung/ptpt/internal/file"
+	"github.com/leslieleung/ptpt/internal/interract"
 	"github.com/leslieleung/ptpt/internal/ui"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -43,7 +43,7 @@ func lint(cmd *cobra.Command, args []string) {
 
 	log.Debugf("files: %v", files)
 	for _, s := range files {
-		input, err := file.ReadFromFile(s)
+		input, err := interract.ReadFromFile(s)
 		if err != nil {
 			ui.ErrorfExit("failed to read from file: %v", err)
 		}
@@ -55,7 +55,7 @@ func lint(cmd *cobra.Command, args []string) {
 		if lintLang == "zh" {
 			promptName = "lint-zh"
 		}
-		resp := core.DoPrompt(promptName, input, variables)
+		resp, _ := core.DoPrompt(promptName, input, variables)
 		if resp != "" {
 			fmt.Println(resp)
 		}
@@ -76,7 +76,7 @@ func handleDiff(args []string) ([]string, error) {
 	if len(args) == 0 {
 		args = []string{"HEAD"}
 	}
-	return file.DiffFiles(args)
+	return interract.DiffFiles(args)
 }
 
 func handleFiles(args []string) ([]string, error) {

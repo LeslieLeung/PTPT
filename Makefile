@@ -1,4 +1,6 @@
 
+version =
+
 .PHONY: gox
 gox:
 	gox -osarch="darwin/amd64 darwin/arm64 linux/amd64 linux/arm64 windows/amd64" -output="build/ptpt_{{.OS}}_{{.Arch}}"
@@ -9,6 +11,6 @@ clean:
 
 .PHONY: priv
 priv:
-	gox -osarch="darwin/amd64 darwin/arm64 linux/amd64 linux/arm64 windows/amd64" -output="build/ptpt_private_{{.OS}}_{{.Arch}}" -tags=private
+	gox -osarch="darwin/amd64 darwin/arm64 linux/amd64 linux/arm64 windows/amd64" -output="build/ptpt_private_{{.OS}}_{{.Arch}}_${version}" -tags=private
 
 release: gox

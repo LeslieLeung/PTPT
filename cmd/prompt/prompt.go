@@ -2,7 +2,7 @@ package prompt
 
 import (
 	"bytes"
-	"github.com/leslieleung/ptpt/internal/file"
+	"github.com/leslieleung/ptpt/internal/interract"
 	"github.com/leslieleung/ptpt/internal/prompt"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/leslieleung/ptpt/static"
@@ -53,16 +53,16 @@ func LoadPrompt() {
 		}
 	}
 	var dirPrompts []os.DirEntry
-	if _, err := os.Stat(file.GetPromptDir()); err != nil {
+	if _, err := os.Stat(interract.GetPromptDir()); err != nil {
 		goto SumPrompts
 	}
-	dirPrompts, err = os.ReadDir(file.GetPromptDir())
+	dirPrompts, err = os.ReadDir(interract.GetPromptDir())
 	if err != nil {
 		ui.ErrorfExit("Error reading external config file, %s", err)
 	}
-	log.Debugf("dir: %s", file.GetPromptDir())
+	log.Debugf("dir: %s", interract.GetPromptDir())
 	for _, dirPrompt := range dirPrompts {
-		err := iterateDir(filepath.Join(file.GetPromptDir(), dirPrompt.Name()), dirPrompt, vp, prompts)
+		err := iterateDir(filepath.Join(interract.GetPromptDir(), dirPrompt.Name()), dirPrompt, vp, prompts)
 		if err != nil {
 			ui.ErrorfExit("Error reading external config file, %s", err)
 		}

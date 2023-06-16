@@ -2,7 +2,7 @@ package config
 
 import (
 	"github.com/AlecAivazis/survey/v2"
-	"github.com/leslieleung/ptpt/internal/file"
+	"github.com/leslieleung/ptpt/internal/interract"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/spf13/viper"
 	"os"
@@ -48,13 +48,13 @@ func CreateConfig() {
 	vp.Set("api_key", answers.ApiKey)
 	vp.Set("proxy_url", answers.ProxyURL)
 	vp.Set("proxy", answers.Proxy)
-	if _, err := os.Stat(file.GetPTPTDir()); err != nil {
-		err = os.Mkdir(file.GetPTPTDir(), 0o755)
+	if _, err := os.Stat(interract.GetPTPTDir()); err != nil {
+		err = os.Mkdir(interract.GetPTPTDir(), 0o755)
 		if err != nil {
 			ui.ErrorfExit("Failed to create config: %v", err)
 		}
 	}
-	err = vp.WriteConfigAs(filepath.Join(file.GetPTPTDir(), "config.yaml"))
+	err = vp.WriteConfigAs(filepath.Join(interract.GetPTPTDir(), "config.yaml"))
 	if err != nil {
 		ui.ErrorfExit("Failed to create config: %v", err)
 	}

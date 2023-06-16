@@ -1,4 +1,4 @@
-package file
+package interract
 
 import (
 	log "github.com/sirupsen/logrus"

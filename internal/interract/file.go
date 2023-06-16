@@ -1,4 +1,4 @@
-package file
+package interract
 
 import (
 	"github.com/leslieleung/ptpt/internal/ui"
