@@ -6,7 +6,7 @@ require (
 	github.com/AlecAivazis/survey/v2 v2.3.7
 	github.com/avast/retry-go/v4 v4.3.4
 	github.com/briandowns/spinner v1.23.0
-	github.com/gookit/color v1.5.3
+	github.com/gookit/color v1.5.4
 	github.com/sashabaranov/go-openai v1.16.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.7.0
