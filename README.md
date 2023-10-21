@@ -6,38 +6,19 @@ English | [简体中文](README_zh.md)
 
 ## Introduction
 
-PTPT is an command-line tool that allows you to easily convert plain text files using pre-defined prompts with the help of ChatGPT. 
+PTPT is a command-line tool that allows you to easily convert plain text files using pre-defined prompts with the help of ChatGPT. 
 With PTPT, you can effortlessly create and share prompt formats, making collaboration and customization a breeze. 
 Plus, by subscribing, you gain access to even more prompts to enhance your experience.
 If you're interested in prompt engineering, you can use PTPT to develop and share your prompts.
 
 ## Features
 
-> If you don't have access to GPT-4 yet, you can try [AIProxy](https://aiproxy.io/).
-
-- Let ChatGPT handle plain text files for you!
-- Predefined prompts (currently with `18` prompts, contributions welcome!)
-- Convenient sharing and extension of prompts format
-- 🌟Get more prompts by subscribing
-- 🌟Develop and manage your prompts
-- Use via proxy
-- 🌟Lint your code with ChatGPT!
-- 🌟Chat with ChatGPT in your terminal!
-
-List of Prompts currently supported:
-
-- [x] 🧸Role-playing (for entertainment only) - [role_play](docs/prompts/role_play.md)
-- [x] 🧸Greeting (for entertainment only) - [hello](docs/prompts/hello.md)
-- [x] 📝Translate Markdown - [translate](docs/prompts/translate.md)
-- [x] 📝Translate csv to csv - [translate](docs/prompts/translate.md)
-- [ ] 📝Translate csv to GNU po (WIP)
-- [x] 💻Code review - [code_review](docs/prompts/code_review.md)
-- [x] 💻Convert json to go struct - [json_converter](docs/prompts/json_converter.md)
-- [x] 📝Generate prompt documentation - [prompt_doc](docs/prompts/prompt_doc.md)
-- [x] 💻Generate gorm struct - [sql](docs/prompts/sql.md)
-- [x] 💻Generate regular expression - [regex](docs/prompts/regex.md)
-- [x] 💻Generate summarize and SEO keywords
-
+- `lint` Lint your code to find potential problems.
+- `commit` Generate commit message.
+- `chat` Chat with ChatGPT in terminal.
+- `cli` A copilot cli like experience tool. Generate and run cli commands with natural language.
+- `run` Run prompt to process plain text files.
+- `prompt` Create your own prompt or subscribe to prompts.
 
 ## Installation
 
@@ -47,18 +28,27 @@ go install github.com/leslieleung/ptpt@latest
 
 Or download from [Release](https://github.com/LeslieLeung/PTPT/releases)
 
-## Featured Usages
+## Usage
 
-### ChatGPT Lint
+### First Time Setup
+
+For first-time use, please configure `api_key` and `proxy_url` (optional) according to the wizard.
 
 ```bash
-> ptpt lint <file-or-path>
+> ptpt
+```
+
+### Lint Code
+
+```bash
+> ptpt lint <path>
 ```
 
 ![](example/lint_example.png)
 
 > *As of `v0.1.5` , you can use the diff feature to lint the changes in the git repository.*
-> This feature relies on git, make sure `git` is usable.
+> 
+> *This feature relies on git, make sure `git` is usable.*
 
 ```bash
 > ptpt lint -d # default to HEAD
@@ -68,12 +58,8 @@ Or download from [Release](https://github.com/LeslieLeung/PTPT/releases)
 ### Generate Commit Message
 
 ```bash
-# You still have to add files to stage manually
-> git add .
-# Let ptpt do the magic
 > ptpt commit
 ```
-
 
 ### Chat With ChatGPT
 
@@ -81,17 +67,13 @@ Or download from [Release](https://github.com/LeslieLeung/PTPT/releases)
 > ptpt chat
 ```
 
-## Usage
-
-For first-time use, please configure `api_key` and `proxy_url` (optional) according to the wizard.
-
-### Set Temperature
-
-Set the temperature of ChatGPT. The default value is `0.7`.
+### Copilot Cli
 
 ```bash
-> ptpt run lint <file> -t 0.8
+> ptpt cli "List 10 recent modified files in current directory"
 ```
+
+![](docs/screenshots/cli.png)
 
 ### Subscribe Prompts
 
@@ -113,7 +95,7 @@ Several useful prompts have already been pre-installed, with more to come in fut
 
 ![](docs/screenshots/interactive.gif)
 
-### CLI
+### Run Prompt
 
 ```bash
 ptpt run [prompt] [inFile] [outFile]
@@ -124,16 +106,17 @@ ptpt run [prompt] [inFile] [outFile]
 > ptpt run translate-markdown Hello.md Hello_tranlsated.md
 ```
 
-### Create your own prompt
+### Prompt Management
 
-#### Interactively
+#### Create Your Own Prompt(Interactively)
+
 ```bash
 > ptpt prompt create
 ```
 
 The generated prompt yaml would be saved to `ptpt/prompt` directory.
 
-#### Syntax
+#### Prompt File Syntax
 
 ```yaml
 version: v0 # version of prompt yaml, currently v0
@@ -148,11 +131,31 @@ prompts: # your defined prompt
 
 By downloading and saving shared prompts to the `ptpt/prompt` directory, more prompts can be used.
 
-### Generating Prompt Documents
+#### Generating Prompt Documents
 
 ```bash
 > ptpt run prompt-doc prompt.yaml > prompt.md
 ```
+
+### Global Settings
+
+#### Set Temperature
+
+Set the temperature of ChatGPT, range from 0.0 ~ 1.0. The default value is `0.7`.
+
+```bash
+> ptpt <cmd> -t 0.8
+```
+
+#### Set Model
+
+Set model to use. The default value is `gpt-3.5-turbo-0613`.
+
+```bash
+> ptpt <cmd> -m gpt-4
+```
+
+For the full list of models, please refer to [HERE](https://github.com/sashabaranov/go-openai/blob/master/completion.go)
 
 ## Configuration File
 
@@ -163,14 +166,6 @@ Windows: %APPDATA%\ptpt
 macOS: $HOME/Library/Application Support/ptpt
 Linux: $HOME/.config/ptpt
 ```
-
-## Roadmap
-- [x] Support proxy configuration
-- [ ] Optimize user experience
-- [ ] Support ChatGPT parameter configuration
-- [ ] PromptHub - Share prompts through yaml files
-- [ ] Support more prompts
-- [ ] Support extra long texts
 
 ## Credits
 This project is inspired by [sigoden/aichat](https://github.com/sigoden/aichat). The original project was written in Rust, but due to my limited abilities, I wanted to create my own version using my familiar technology stack.
