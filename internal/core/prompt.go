@@ -39,7 +39,7 @@ func RunWithHistory(history []openai.ChatCompletionMessage) (string, []openai.Ch
 	spinner := ui.MakeSpinner(os.Stderr)
 	spinner.Suffix = " Waiting for ChatGPT response..."
 	spinner.Start()
-	client := OpenAI{}
+	client := GetClient()
 	resp, _, err := client.CreateChatCompletion(context.Background(), history)
 	if err != nil {
 		ui.ErrorfExit("error creating completion: %s", err)
