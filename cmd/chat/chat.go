@@ -26,7 +26,7 @@ func chat(cmd *cobra.Command, args []string) {
 	chatStruct.Init()
 	chatStruct.Single = singleChat
 	input := ""
-	msg := bytes.NewBufferString("Talk to ChatGPT...")
+	msg := bytes.NewBufferString("Talk to Ai...")
 	if singleChat {
 		msg.WriteString(" [Single]")
 	}

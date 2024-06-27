@@ -37,9 +37,9 @@ func DoPrompt(promptName string, in string, variables map[string]string) (string
 
 func RunWithHistory(history []openai.ChatCompletionMessage) (string, []openai.ChatCompletionMessage) {
 	spinner := ui.MakeSpinner(os.Stderr)
-	spinner.Suffix = " Waiting for ChatGPT response..."
+	spinner.Suffix = " Waiting for Ai response..."
 	spinner.Start()
-	client := OpenAI{}
+	client := GetClient()
 	resp, _, err := client.CreateChatCompletion(context.Background(), history)
 	if err != nil {
 		ui.ErrorfExit("error creating completion: %s", err)

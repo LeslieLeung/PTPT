@@ -9,6 +9,7 @@ import (
 )
 
 type Config struct {
+	AiName       string   `yaml:"ai_name" mapstructure:"ai_name"`
 	APIKey       string   `yaml:"api_key" mapstructure:"api_key"`
 	ProxyURL     string   `yaml:"proxy_url" mapstructure:"proxy_url"`
 	Proxy        string   `yaml:"proxy" mapstructure:"proxy"`

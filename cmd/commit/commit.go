@@ -7,7 +7,6 @@ import (
 	"github.com/leslieleung/ptpt/internal/core"
 	"github.com/leslieleung/ptpt/internal/interract"
 	"github.com/leslieleung/ptpt/internal/ui"
-	"github.com/sashabaranov/go-openai"
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +21,6 @@ var lang string
 func commit(cmd *cobra.Command, args []string) {
 	promptcmd.LoadPrompt()
 	// use 16K model for very long diff
-	core.Model = openai.GPT3Dot5Turbo16K
 	var purposed string
 	err := survey.AskOne(&survey.Input{
 		Message: "Describe the purpose of this commit(Press Enter to skip):",
