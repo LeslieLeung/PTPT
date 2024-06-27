@@ -6,7 +6,7 @@ replace github.com/sashabaranov/go-openai => github.com/LoadFly/go-openai v0.0.0
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.7
-	github.com/avast/retry-go/v4 v4.5.1
+	github.com/avast/retry-go/v4 v4.6.0
 	github.com/briandowns/spinner v1.23.0
 	github.com/gookit/color v1.5.4
 	github.com/sashabaranov/go-openai v1.26.1
