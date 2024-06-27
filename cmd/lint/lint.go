@@ -15,7 +15,7 @@ import (
 
 var LintCmd = &cobra.Command{
 	Use:    "lint",
-	Short:  "Lint your code with ChatGPT",
+	Short:  "Lint your code with Ai",
 	PreRun: ui.ToggleDebug,
 	Run:    lint,
 }

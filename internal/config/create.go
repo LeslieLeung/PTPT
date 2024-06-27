@@ -42,7 +42,7 @@ func CreateConfig() {
 		{
 			Name: "ai_name",
 			Prompt: &survey.Input{
-				Message: "Enter your AI name: eg: kimi, ChatGpt",
+				Message: "Enter your AI name: eg: kimi, Ai",
 			},
 			Validate: survey.Required,
 		},

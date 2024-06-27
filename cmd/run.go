@@ -143,7 +143,7 @@ func handleThreeArgs(args []string) {
 
 func doPrompt(promptName string, in string) string {
 	spinner := ui.MakeSpinner(os.Stderr)
-	spinner.Suffix = " Waiting for ChatGPT response..."
+	spinner.Suffix = " Waiting for Ai response..."
 	spinner.Start()
 	client := core.GetClient()
 	p, ok := prompt.Lib[promptName]

@@ -31,6 +31,9 @@ func (o *OpenAI) getClient() *openai.Client {
 	if cfg.APIKey == "" {
 		ui.ErrorfExit("API key is not set. Please set it in %s", filepath.Join(interract.GetPTPTDir(), "config.yaml"))
 	}
+	if Model == "" {
+		Model = openai.GPT3Dot5Turbo0613
+	}
 	o.once.Do(func() {
 		c := openai.DefaultConfig(cfg.APIKey)
 		if cfg.ProxyURL != "" {

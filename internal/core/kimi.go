@@ -28,6 +28,9 @@ func (k *Kimi) getClient() *openai.Client {
 	if cfg.APIKey == "" {
 		ui.ErrorfExit("API key is not set. Please set it in %s", filepath.Join(interract.GetPTPTDir(), "config.yaml"))
 	}
+	if Model == "" {
+		Model = "moonshot-v1-8k"
+	}
 	k.once.Do(func() {
 		c := openai.DefaultConfig(cfg.APIKey)
 		c.BaseURL = defaultUrl
@@ -48,7 +51,7 @@ func (k *Kimi) CreateChatCompletion(ctx context.Context, messages []openai.ChatC
 	var err error
 	err = retry.Do(func() error {
 		resp, err = k.getClient().CreateChatCompletion(ctx, openai.ChatCompletionRequest{
-			Model:       "moonshot-v1-8k",
+			Model:       Model,
 			Messages:    messages,
 			Temperature: k.temperature,
 		})
@@ -68,7 +71,7 @@ func (k *Kimi) CreateChatCompletion(ctx context.Context, messages []openai.ChatC
 
 func (k *Kimi) StreamChatCompletion(ctx context.Context, messages []openai.ChatCompletionMessage) (*openai.ChatCompletionStream, error) {
 	return k.getClient().CreateChatCompletionStream(ctx, openai.ChatCompletionRequest{
-		Model:    "moonshot-v1-8k",
+		Model:    Model,
 		Messages: messages,
 		Stream:   true,
 	})
