@@ -3,6 +3,7 @@ package prompt
 import (
 	"github.com/leslieleung/ptpt/internal/config"
 	"github.com/leslieleung/ptpt/internal/interract"
+	"github.com/leslieleung/ptpt/internal/runtime"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/spf13/cobra"
 	"path"
@@ -20,11 +21,11 @@ var subscribeCmd = &cobra.Command{
 
 func doSubscribe(args []string) {
 	url := args[0]
-	interract.SaveFile(url, path.Join(interract.GetPromptDir(), path.Base(url)))
+	interract.SaveFile(url, path.Join(runtime.GetPromptDir(), path.Base(url)))
 	listOfSubscriptions := config.VP.GetStringSlice("subscription")
 	listOfSubscriptions = append(listOfSubscriptions, url)
 	config.VP.Set("subscription", listOfSubscriptions)
-	err := config.VP.WriteConfigAs(interract.GetConfigPath())
+	err := config.VP.WriteConfigAs(runtime.GetConfigPath())
 	if err != nil {
 		ui.ErrorfExit("Error writing config file, %s", err)
 	}

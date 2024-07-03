@@ -24,8 +24,9 @@ prompts:
   - name: lint
     description: "Lint"
     system: |
-      I want you to act as a code linter. Find and fix any bugs and typos.
+      I want you to act as a code linter. Find and fix any bugs and typos and provide improvement suggestions.
       Consider the context for better suggestion. 
+      Do not check for undefined or unused variables.
       Do not include any personal opinions or subjective evaluations in your response.
       Do not include the modified code in your response. Do not add other format. Do not append new line on end of file.
       The filename is {filename}.

@@ -1,19 +1,19 @@
-package cli
+package next
 
 import (
 	"github.com/leslieleung/ptpt/cmd/prompt"
 	"github.com/leslieleung/ptpt/internal/core"
 	"github.com/leslieleung/ptpt/internal/interract"
 	"github.com/leslieleung/ptpt/internal/ui"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"runtime"
 )
 
 var Cmd = &cobra.Command{
-	Use:    "cli",
+	Use:    "next",
 	PreRun: preRun,
-	Run:    cli,
-	Args:   cobra.ExactArgs(1),
+	Run:    next,
 }
 
 var os string
@@ -23,23 +23,32 @@ func preRun(cmd *cobra.Command, args []string) {
 	prompt.LoadPrompt()
 }
 
-func cli(cmd *cobra.Command, args []string) {
-	// default to current os
+func next(cmd *cobra.Command, args []string) {
 	if os == "" {
 		os = runtime.GOOS
 	}
+	if os == "windows" {
+		ui.ErrorfExit("ptpt next is not supported on windows")
+	}
 
-	out, history := core.DoPrompt("cli", args[0], map[string]string{
+	// get the last ten commands from history
+	history, err := interract.GetHistory()
+	if err != nil {
+		ui.ErrorfExit("Failed to get history: %v", err)
+	}
+	log.Infof("History: %s", history)
+
+	out, chatHistory := core.DoPrompt("next", history, map[string]string{
 		"os": os,
 	})
 
-	out = interract.AskForRevise(out, history)
+	out = interract.AskForRevise(out, chatHistory)
 	if out == "" {
-		ui.ErrorfExit("Generate cli error")
+		ui.ErrorfExit("Generate next error")
 	}
 	ui.Printf("Running cmd: %s", out)
 
-	_, err := interract.RunCmd(out, true)
+	_, err = interract.RunCmd(out, true)
 	if err != nil {
 		ui.ErrorfExit("Failed to run cmd: %v", err)
 	}

@@ -3,7 +3,7 @@
 package config
 
 import (
-	"github.com/leslieleung/ptpt/internal/interract"
+	"github.com/leslieleung/ptpt/internal/runtime"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/spf13/viper"
 )
@@ -22,7 +22,7 @@ func Init() {
 	VP = viper.New()
 	VP.SetConfigName("config")
 	VP.SetConfigType("yaml")
-	VP.AddConfigPath(interract.GetPTPTDir())
+	VP.AddConfigPath(runtime.GetPTPTDir())
 	err := VP.ReadInConfig()
 	if err != nil {
 		ui.Errorf("Seems like you haven't initialized the config file yet.")

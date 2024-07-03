@@ -2,6 +2,7 @@ package interract
 
 import (
 	"fmt"
+	"github.com/leslieleung/ptpt/internal/runtime"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"io"
 	"net/http"
@@ -19,7 +20,7 @@ func SaveFile(url, path string) {
 	}
 	defer response.Body.Close()
 
-	err = os.MkdirAll(GetPromptDir(), 0755)
+	err = os.MkdirAll(runtime.GetPromptDir(), 0755)
 	if err != nil {
 		ui.ErrorfExit("Error creating directory, %s", err)
 	}

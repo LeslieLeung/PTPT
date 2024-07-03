@@ -2,6 +2,7 @@ package core
 
 import (
 	"context"
+	"github.com/leslieleung/ptpt/internal/runtime"
 	"net/http"
 	"net/url"
 	"path/filepath"
@@ -9,7 +10,6 @@ import (
 
 	"github.com/avast/retry-go/v4"
 	"github.com/leslieleung/ptpt/internal/config"
-	"github.com/leslieleung/ptpt/internal/interract"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/sashabaranov/go-openai"
 	log "github.com/sirupsen/logrus"
@@ -29,7 +29,7 @@ var (
 func (o *OpenAI) getClient() *openai.Client {
 	cfg := config.GetIns()
 	if cfg.APIKey == "" {
-		ui.ErrorfExit("API key is not set. Please set it in %s", filepath.Join(interract.GetPTPTDir(), "config.yaml"))
+		ui.ErrorfExit("API key is not set. Please set it in %s", filepath.Join(runtime.GetPTPTDir(), "config.yaml"))
 	}
 	o.once.Do(func() {
 		c := openai.DefaultConfig(cfg.APIKey)

@@ -2,8 +2,8 @@ package prompt
 
 import (
 	"github.com/AlecAivazis/survey/v2"
-	"github.com/leslieleung/ptpt/internal/interract"
 	"github.com/leslieleung/ptpt/internal/prompt"
+	"github.com/leslieleung/ptpt/internal/runtime"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/spf13/cobra"
 	"path/filepath"
@@ -20,7 +20,7 @@ func createPrompt(cmd *cobra.Command, args []string) {
 	var createFileName string
 	err := survey.AskOne(&survey.Input{
 		Message: "Prompt file name:",
-		Default: filepath.Join(interract.GetPromptDir(), "default.yaml"),
+		Default: filepath.Join(runtime.GetPromptDir(), "default.yaml"),
 		Help:    "Absolute path to the prompt file.",
 	},
 		&createFileName, survey.WithValidator(survey.Required))

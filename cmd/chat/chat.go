@@ -2,6 +2,7 @@ package chat
 
 import (
 	"bytes"
+	"errors"
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/leslieleung/ptpt/internal/core"
@@ -11,9 +12,8 @@ import (
 )
 
 var ChatCmd = &cobra.Command{
-	Use:     "chat",
-	Run:     chat,
-	PostRun: postChatHook,
+	Use: "chat",
+	Run: chat,
 }
 var (
 	singleChat bool
@@ -26,21 +26,24 @@ func chat(cmd *cobra.Command, args []string) {
 	chatStruct.Init()
 	chatStruct.Single = singleChat
 	input := ""
-	msg := bytes.NewBufferString("Talk to ChatGPT...")
+	msg := bytes.NewBufferString("Talk to ChatGPT...(Press Ctrl+C to exit)")
 	if singleChat {
 		msg.WriteString(" [Single]")
 	}
 	for {
 		prompt := &survey.Multiline{
 			Message: msg.String(),
-			Help:    "Press Ctrl+C to exit.",
 		}
 		err := survey.AskOne(prompt, &input)
 		if err != nil {
-			if err == terminal.InterruptErr {
+			if errors.Is(err, terminal.InterruptErr) {
 				return
 			}
 			ui.ErrorfExit("Error: %v", err)
+		}
+		// input empty message to end chat
+		if input == "" {
+			return
 		}
 		chatStruct.AddMessage(openai.ChatCompletionMessage{
 			Role:    openai.ChatMessageRoleUser,
@@ -48,10 +51,6 @@ func chat(cmd *cobra.Command, args []string) {
 		})
 		chatStruct.CreateResponse()
 	}
-}
-
-func postChatHook(cmd *cobra.Command, args []string) {
-	//ui.Printf("Total tokens used: %d\n", chatStruct.Usage.TotalTokens)
 }
 
 func init() {

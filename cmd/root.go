@@ -5,6 +5,7 @@ import (
 	"github.com/leslieleung/ptpt/cmd/cli"
 	"github.com/leslieleung/ptpt/cmd/commit"
 	"github.com/leslieleung/ptpt/cmd/lint"
+	"github.com/leslieleung/ptpt/cmd/next"
 	"github.com/leslieleung/ptpt/cmd/prompt"
 	"github.com/leslieleung/ptpt/internal/core"
 	"github.com/leslieleung/ptpt/internal/ui"
@@ -32,6 +33,7 @@ func init() {
 	rootCmd.AddCommand(chat.ChatCmd)
 	rootCmd.AddCommand(commit.Cmd)
 	rootCmd.AddCommand(cli.Cmd)
+	rootCmd.AddCommand(next.Cmd)
 
 	rootCmd.PersistentFlags().BoolVarP(&ui.Verbose, "verbose", "v", false, "verbose output")
 	rootCmd.PersistentFlags().Float32VarP(&core.Temperature, "temperature", "t", 0.2, "temperature of the prompt")

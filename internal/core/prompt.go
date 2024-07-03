@@ -31,11 +31,11 @@ func DoPrompt(promptName string, in string, variables map[string]string) (string
 			Content: in,
 		},
 	}
-	resp, history := RunWithHistory(history)
+	resp := RunWithHistory(history)
 	return resp, history
 }
 
-func RunWithHistory(history []openai.ChatCompletionMessage) (string, []openai.ChatCompletionMessage) {
+func RunWithHistory(history []openai.ChatCompletionMessage) string {
 	spinner := ui.MakeSpinner(os.Stderr)
 	spinner.Suffix = " Waiting for ChatGPT response..."
 	spinner.Start()
@@ -49,5 +49,5 @@ func RunWithHistory(history []openai.ChatCompletionMessage) (string, []openai.Ch
 		Content: resp,
 	})
 	spinner.Stop()
-	return resp, history
+	return resp
 }

@@ -1,13 +1,18 @@
-package interract
+package runtime
 
 import (
+	log "github.com/sirupsen/logrus"
 	"os"
 	"path/filepath"
 )
 
 // GetPTPTDir returns the path to the ptpt directory
 func GetPTPTDir() string {
-	configDir, _ := os.UserConfigDir()
+	configDir, err := os.UserConfigDir()
+	if err != nil {
+		log.Errorf("Failed to get user config dir: %v", err)
+		return ""
+	}
 	return filepath.Join(configDir, "ptpt")
 }
 

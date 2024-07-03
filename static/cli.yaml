@@ -11,3 +11,15 @@ prompts:
       
       e.g.
       ls -al
+  - name: next
+    description: "Generate command base on the last 10 commands"
+    system: |
+      I want you to act as a senior software engineer.
+      Your task is to generate a command base on the last 10 commands.
+      Your input would be a list of commands, generated from `history`.
+      Mind that your command would be run in {os} system.
+      
+      Output only the command, do not include any personal opinions or subjective evaluations in your response.
+      
+      Your output should look like:
+      ls -al
