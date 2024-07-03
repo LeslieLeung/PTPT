@@ -13,6 +13,7 @@ type answerStruct struct {
 	ApiKey   string `survey:"api_key"`
 	ProxyURL string `survey:"proxy_url"`
 	Proxy    string `survey:"proxy"`
+	AiName   string `survey:"ai_name"`
 }
 
 func CreateConfig() {
@@ -38,6 +39,13 @@ func CreateConfig() {
 				Help:    "Enter the proxy server, for example: http://127.0.0.1:1080",
 			},
 		},
+		{
+			Name: "ai_name",
+			Prompt: &survey.Input{
+				Message: "Enter your AI name: eg: kimi, Ai",
+			},
+			Validate: survey.Required,
+		},
 	}
 	answers := answerStruct{}
 	err := survey.Ask(qs, &answers)
@@ -48,8 +56,9 @@ func CreateConfig() {
 	vp.Set("api_key", answers.ApiKey)
 	vp.Set("proxy_url", answers.ProxyURL)
 	vp.Set("proxy", answers.Proxy)
-	if _, err := os.Stat(runtime.GetPTPTDir()); err != nil {
-		err = os.Mkdir(runtime.GetPTPTDir(), 0o755)
+	vp.Set("ai_name", answers.AiName)
+	if _, err := os.Stat(interract.GetPTPTDir()); err != nil {
+		err = os.Mkdir(interract.GetPTPTDir(), 0o755)
 		if err != nil {
 			ui.ErrorfExit("Failed to create config: %v", err)
 		}

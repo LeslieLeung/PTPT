@@ -2,7 +2,6 @@ package core
 
 import (
 	"context"
-	"github.com/leslieleung/ptpt/internal/runtime"
 	"net/http"
 	"net/url"
 	"path/filepath"
@@ -10,62 +9,58 @@ import (
 
 	"github.com/avast/retry-go/v4"
 	"github.com/leslieleung/ptpt/internal/config"
+	"github.com/leslieleung/ptpt/internal/interract"
 	"github.com/leslieleung/ptpt/internal/ui"
 	"github.com/sashabaranov/go-openai"
 	log "github.com/sirupsen/logrus"
 )
 
-type OpenAI struct {
+type Kimi struct {
 	client      *openai.Client
 	once        sync.Once
 	temperature float32
 }
 
-var (
-	Temperature float32
-	Model       string
-)
+var defaultUrl = "https://api.moonshot.cn/v1"
 
-func (o *OpenAI) getClient() *openai.Client {
+func (k *Kimi) getClient() *openai.Client {
 	cfg := config.GetIns()
 	if cfg.APIKey == "" {
-		ui.ErrorfExit("API key is not set. Please set it in %s", filepath.Join(runtime.GetPTPTDir(), "config.yaml"))
+		ui.ErrorfExit("API key is not set. Please set it in %s", filepath.Join(interract.GetPTPTDir(), "config.yaml"))
 	}
 	if Model == "" {
-		Model = openai.GPT3Dot5Turbo0613
+		Model = "moonshot-v1-8k"
 	}
-	o.once.Do(func() {
+	k.once.Do(func() {
 		c := openai.DefaultConfig(cfg.APIKey)
-		if cfg.ProxyURL != "" {
-			c.BaseURL, _ = url.JoinPath(cfg.ProxyURL, "v1")
-		}
+		c.BaseURL = defaultUrl
 		if cfg.Proxy != "" {
 			proxy, _ := url.Parse(cfg.Proxy)
 			c.HTTPClient.Transport = &http.Transport{
 				Proxy: http.ProxyURL(proxy),
 			}
 		}
-		o.client = openai.NewClientWithConfig(c)
+		k.client = openai.NewClientWithConfig(c)
 	})
-	o.temperature = Temperature
-	return o.client
+	k.temperature = Temperature
+	return k.client
 }
 
-func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.ChatCompletionMessage) (string, Usage, error) {
+func (k *Kimi) CreateChatCompletion(ctx context.Context, messages []openai.ChatCompletionMessage) (string, Usage, error) {
 	var resp openai.ChatCompletionResponse
 	var err error
 	err = retry.Do(func() error {
-		resp, err = o.getClient().CreateChatCompletion(ctx, openai.ChatCompletionRequest{
+		resp, err = k.getClient().CreateChatCompletion(ctx, openai.ChatCompletionRequest{
 			Model:       Model,
 			Messages:    messages,
-			Temperature: o.temperature,
+			Temperature: k.temperature,
 		})
 		if err != nil {
 			return err
 		}
 		return nil
 	}, retry.Attempts(3), retry.Delay(1))
-	log.Debugf("Token Usage [Prompt: %d, Completion: %d, Total: %d]",
+	log.Debugf("Kimi Token Usage [Prompt: %d, Completion: %d, Total: %d]",
 		resp.Usage.PromptTokens, resp.Usage.CompletionTokens, resp.Usage.TotalTokens)
 	log.Debugf("Response: %+v", resp)
 	if len(resp.Choices) == 0 {
@@ -74,14 +69,14 @@ func (o *OpenAI) CreateChatCompletion(ctx context.Context, messages []openai.Cha
 	return resp.Choices[0].Message.Content, Usage(resp.Usage), nil
 }
 
-func (o *OpenAI) StreamChatCompletion(ctx context.Context, messages []openai.ChatCompletionMessage) (*openai.ChatCompletionStream, error) {
-	return o.getClient().CreateChatCompletionStream(ctx, openai.ChatCompletionRequest{
+func (k *Kimi) StreamChatCompletion(ctx context.Context, messages []openai.ChatCompletionMessage) (*openai.ChatCompletionStream, error) {
+	return k.getClient().CreateChatCompletionStream(ctx, openai.ChatCompletionRequest{
 		Model:    Model,
 		Messages: messages,
 		Stream:   true,
 	})
 }
 
-func (o *OpenAI) SetTemperature(t float32) {
-	o.temperature = t
+func (k *Kimi) SetTemperature(t float32) {
+	k.temperature = t
 }

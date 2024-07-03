@@ -9,15 +9,14 @@ import (
 	"github.com/leslieleung/ptpt/cmd/prompt"
 	"github.com/leslieleung/ptpt/internal/core"
 	"github.com/leslieleung/ptpt/internal/ui"
-	"github.com/sashabaranov/go-openai"
 	"github.com/spf13/cobra"
 	"os"
 )
 
 var rootCmd = &cobra.Command{
 	Use:   "ptpt",
-	Short: "Use ChatGPT to generate plain text through prompt.",
-	Long:  `Use ChatGPT to generate plain text through prompt.`,
+	Short: "Use Ai to generate plain text through prompt.",
+	Long:  `Use Ai to generate plain text through prompt.`,
 }
 
 func Execute() {
@@ -37,5 +36,5 @@ func init() {
 
 	rootCmd.PersistentFlags().BoolVarP(&ui.Verbose, "verbose", "v", false, "verbose output")
 	rootCmd.PersistentFlags().Float32VarP(&core.Temperature, "temperature", "t", 0.2, "temperature of the prompt")
-	rootCmd.PersistentFlags().StringVarP(&core.Model, "model", "m", openai.GPT3Dot5Turbo0613, "model to use, recommend list of models [gpt-3.5-turbo-0613(default), gpt-4-0314, gpt-4-32k-0314]")
+	rootCmd.PersistentFlags().StringVarP(&core.Model, "model", "m", "", "model to use, recommend list of models [gpt-3.5-turbo-0613(default), gpt-4-0314, gpt-4-32k-0314]")
 }

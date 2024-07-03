@@ -38,14 +38,14 @@ func (c *Chat) AddMessage(msg openai.ChatCompletionMessage) {
 }
 
 func (c *Chat) CreateResponse() {
-	client := OpenAI{}
+	client := GetClient()
 	resp, err := client.StreamChatCompletion(context.Background(), c.History)
 	if err != nil {
 		ui.ErrorfExit("error creating completion: %s", err)
 	}
 	defer resp.Close()
 
-	color.Blue.Printf("ChatGPT: \n")
+	color.Blue.Printf("AI: \n")
 	var fullResp strings.Builder
 	for {
 		r, err := resp.Recv()
