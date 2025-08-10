@@ -2,7 +2,7 @@ module github.com/leslieleung/ptpt
 
 go 1.20
 
-replace github.com/sashabaranov/go-openai => github.com/LoadFly/go-openai v0.0.0-20240626170819-632ea23aca1d
+replace github.com/sashabaranov/go-openai => github.com/LoadFly/go-openai v0.0.0-20240626174109-b726c629decc
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.7
