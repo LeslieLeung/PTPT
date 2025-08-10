@@ -2,6 +2,8 @@ github.com/AlecAivazis/survey/v2 v2.3.7 h1:6I/u8FvytdGsgonrYsVn2t8t4QiRnh6QSTqkk
 github.com/AlecAivazis/survey/v2 v2.3.7/go.mod h1:xUTIdE4KCOIjsBAE1JYsUPoCqYdZ1reCfTwbto0Fduo=
 github.com/LoadFly/go-openai v0.0.0-20240626170819-632ea23aca1d h1:ockCPxucS3g12tgKlkVvq6WU3jaIO/g5mrCYmTLUDGs=
 github.com/LoadFly/go-openai v0.0.0-20240626170819-632ea23aca1d/go.mod h1:lj5b/K+zjTSFxVLijLSTDZuP7adOgerWeFyZLUhAKRg=
+github.com/LoadFly/go-openai v0.0.0-20240626174109-b726c629decc h1:PrXpsq8WxdddwXYuEc2is+dQSe8UdTGtthiX3nMsYkk=
+github.com/LoadFly/go-openai v0.0.0-20240626174109-b726c629decc/go.mod h1:lj5b/K+zjTSFxVLijLSTDZuP7adOgerWeFyZLUhAKRg=
 github.com/Netflix/go-expect v0.0.0-20220104043353-73e0943537d2 h1:+vx7roKuyA63nhn5WAunQHLTznkw5W8b1Xc0dNjp83s=
 github.com/Netflix/go-expect v0.0.0-20220104043353-73e0943537d2/go.mod h1:HBCaDeC1lPdgDeDbhX8XFpy1jqjK0IBG8W5K+xYqA0w=
 github.com/avast/retry-go/v4 v4.6.0 h1:K9xNA+KeB8HHc2aWFuLb25Offp+0iVRXEvFx8IinRJA=
